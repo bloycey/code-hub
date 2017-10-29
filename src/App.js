@@ -37,7 +37,7 @@ class App extends Component {
       
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       
-      <a className="navbar-brand" href="#">Dashboard</a>
+      <a className="navbar-brand" href="#">Code Hub</a>
       <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -54,43 +54,16 @@ class App extends Component {
       <nav className="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
         <ul className="nav nav-pills flex-column">
           <li className="nav-item">
-            <a className="nav-link active" href="#">Overview <span className="sr-only">(current)</span></a>
+            <a className="nav-link active" href="#">Home <span className="sr-only">(current)</span></a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Reports</a>
+            <a className="nav-link" href="#">Category 1</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Analytics</a>
+            <a className="nav-link" href="#">Category 2</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Export</a>
-          </li>
-        </ul>
-
-        <ul className="nav nav-pills flex-column">
-          <li className="nav-item">
-            <a className="nav-link" href="#">Nav item</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Nav item again</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">One more nav</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Another nav item</a>
-          </li>
-        </ul>
-
-        <ul className="nav nav-pills flex-column">
-          <li className="nav-item">
-            <a className="nav-link" href="#">Nav item again</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">One more nav</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Another nav item</a>
+            <a className="nav-link" href="#">Category 3</a>
           </li>
         </ul>
       </nav>
@@ -101,13 +74,15 @@ class App extends Component {
        
 
         <CreateSnippet />
-        <div> 
+         
         {this.state.snips.map((snip) => {
           return (
-            <Snippet key={snip.id} title={snip.title} body={snip.body} />
+            <span key={snip.id}>
+            <Snippet id={snip.id} title={snip.title} body={snip.body} />
+           </span>
           )
         })}
-        </div>
+        
 
       </main>
     </div>
