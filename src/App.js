@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CreateSnippet from './components/createSnippet';
 import './App.css';
 
 class App extends Component {
@@ -68,6 +69,15 @@ class App extends Component {
 
       <main role="main" className="col-sm-9 ml-sm-auto col-md-10 pt-3">
         <h1>Dashboard</h1>
+      
+        <CreateSnippet />
+          
+          <section className='display-item'>
+            <div className='wrapper'>
+              <ul>
+              </ul>
+            </div>
+          </section>
 
       </main>
     </div>
