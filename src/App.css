@@ -4,6 +4,7 @@
 
 .sidebar {
   height: 100vh;
+  position: fixed;
 }
 
 .sidebar .nav:first-child {
@@ -45,7 +46,7 @@
 
 /*****************/
 
-.add-code {
+.add-code, .display-snippet {
   border-radius: 2px;
   margin-right: 50px;
   background-color: rgb(237, 237, 237);
@@ -56,7 +57,12 @@
   margin-right: auto;
 }
 
-.display-item {
+.display-snippet {
+  margin: 20px;
+  display: inline-block;
+}
+
+.display-item{
   width: 65%;
   margin-left: 50px;
 }

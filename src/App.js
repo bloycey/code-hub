@@ -1,9 +1,37 @@
 import React, { Component } from 'react';
+import firebase from './firebase.js'
 import CreateSnippet from './components/createSnippet';
+import Snippet from './components/snippets';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      snips: []
+    }
+  }
+
+  componentDidMount() {
+    const itemsRef = firebase.database().ref('snippets');
+    itemsRef.on('value', (snapshot) => {
+      let snips = snapshot.val();
+      let newState = [];
+      for (let snip in snips) {
+        newState.push({
+          id: snip,
+          title: snips[snip].title,
+          body: snips[snip].body
+
+        });
+      }
+      this.setState({
+        snips: newState
+      });
+    });
+  }
   render() {
+
     return (
       <div>
       
@@ -70,14 +98,16 @@ class App extends Component {
       <main role="main" className="col-sm-9 ml-sm-auto col-md-10 pt-3">
         <h1>Dashboard</h1>
       
+       
+
         <CreateSnippet />
-          
-          <section className='display-item'>
-            <div className='wrapper'>
-              <ul>
-              </ul>
-            </div>
-          </section>
+        <div> 
+        {this.state.snips.map((snip) => {
+          return (
+            <Snippet key={snip.id} title={snip.title} body={snip.body} />
+          )
+        })}
+        </div>
 
       </main>
     </div>
