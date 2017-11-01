@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import firebase from './firebase.js'
 import CreateSnippet from './components/createSnippet';
 import Snippet from './components/snippets';
+import Modal from './components/modal';
 import './App.css';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      snips: []
+      snips: [],
+      modalOpen: false
     }
+
+    this._toggleModal = this._toggleModal.bind(this);
+
   }
 
   componentDidMount() {
@@ -31,7 +36,8 @@ class App extends Component {
     });
   }
   render() {
-
+    
+    
     return (
       <div>
       
@@ -71,8 +77,11 @@ class App extends Component {
       <main role="main" className="col-sm-9 ml-sm-auto col-md-10 pt-3">
         <h1>Dashboard</h1>
       
-       
+        <button onClick={this._toggleModal}>Open Modal</button>
 
+       
+       <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal}/>
+        
         <CreateSnippet />
          
         {this.state.snips.map((snip) => {
@@ -90,6 +99,16 @@ class App extends Component {
   </div>
     );
   }
+
+
+
+  _toggleModal(event){
+    event.preventDefault();
+    this.setState({ 
+        modalOpen: !this.state.modalOpen });
+}
+
+
 }
 
 export default App;
