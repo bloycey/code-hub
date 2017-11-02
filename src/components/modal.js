@@ -14,9 +14,10 @@ export class Modal extends React.Component {
         
         if(this.props.status == false){
             return null;
-        }
+        };
         
-       
+        
+
         let modalStyle = {
             position: 'fixed',
             top: 0,
@@ -24,18 +25,24 @@ export class Modal extends React.Component {
             right: 0,
             bottom: 0,
             backgroundColor: 'rgba(52, 52, 52, 0.8)',
-            zIndex: 9999,
+            zIndex: 8000,
         };
-
 
 
         return (
         
             <div className="backdrop" style={modalStyle} onClick={this.props._toggleModal}>
+                <div className="container modal-container" onClick={this._dontClose}>
+                {this.props.children}
+                </div>
             </div>
             
           )
-    }   
+    }
+    
+    _dontClose(event){
+        event.stopPropagation();
+      }
 
 }
  

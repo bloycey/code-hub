@@ -80,9 +80,11 @@ class App extends Component {
         <button onClick={this._toggleModal}>Open Modal</button>
 
        
-       <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal}/>
+       <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal}>
         
-        <CreateSnippet />
+        <CreateSnippet onClick={this._dontClose}/>
+
+        </Modal>
          
         {this.state.snips.map((snip) => {
           return (
@@ -99,8 +101,6 @@ class App extends Component {
   </div>
     );
   }
-
-
 
   _toggleModal(event){
     event.preventDefault();

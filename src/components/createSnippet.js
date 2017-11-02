@@ -20,6 +20,8 @@ class CreateSnippet extends React.Component {
         });
       }
 
+      
+
       handleSubmit(e) {
         e.preventDefault();
         const itemsRef = firebase.database().ref('snippets');
@@ -33,14 +35,26 @@ class CreateSnippet extends React.Component {
           snippetBody: ''
         });
       }
+
+      
+
+
+
     render() { 
 
    
     // console.log(this.props.snippetName, this.props.snippetBody);
-
+    let snippetStyle = {
+      width: '80%',
+      marginLeft: '10%',
+      marginTop: '200px',
+      zIndex: 9000
+    }
         return ( 
 
-        <section className='add-code'>
+         
+
+        <section className='add-code' style={snippetStyle}>
             <form onSubmit={this.handleSubmit}> 
               <input type="text" name="snippetName" placeholder="Title of snippet" onChange={this.handleChange} value={this.state.snippetName}/>
               <textarea type="text" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} />
@@ -50,6 +64,10 @@ class CreateSnippet extends React.Component {
 
          )
     }
+
+  
+
+
 }
  
 export default CreateSnippet;
