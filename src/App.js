@@ -80,9 +80,9 @@ class App extends Component {
         <button onClick={this._toggleModal}>Open Modal</button>
 
        
-       <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal}>
+       <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
         
-        <CreateSnippet onClick={this._dontClose}/>
+        <CreateSnippet />
 
         </Modal>
          
