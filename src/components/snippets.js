@@ -1,7 +1,6 @@
 import React from 'react';
 import '../App.css';
 import firebase from '../firebase.js';
-import Masonry from 'react-masonry-component';
 
 class Snippet extends React.Component {
 

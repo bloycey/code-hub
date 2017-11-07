@@ -101,8 +101,8 @@ class App extends Component {
             {this.state.snips.map((snip) => {
            return (
             // <span key={snip.id}>
-            <Snippet id={snip.id} title={snip.title} body={snip.body} />
-          //  </span>
+            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} />
+            // </span>
 
           )})}
 

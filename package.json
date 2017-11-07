@@ -4,12 +4,15 @@
   "private": true,
   "dependencies": {
     "firebase": "^4.6.0",
+    "font-awesome": "^4.7.0",
     "material-ui": "^0.19.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-masonry-component": "^6.0.1",
     "react-materialize": "^1.0.16",
-    "react-scripts": "1.0.14"
+    "react-mde": "^0.9.5",
+    "react-scripts": "1.0.14",
+    "showdown": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
