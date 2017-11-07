@@ -1,11 +1,11 @@
 import React from 'react';
 import '../App.css';
 import firebase from '../firebase.js';
-import { ReactMde, ReactMdeCommands } from 'react-mde';
-import 'font-awesome/css/font-awesome.css';
-import 'react-mde/lib/styles/react-mde.css';
-import 'react-mde/lib/styles/react-mde-command-styles.css';
-import 'react-mde/lib/styles/markdown-default-theme.css';
+// import { ReactMde, ReactMdeCommands } from 'react-mde';
+// import 'font-awesome/css/font-awesome.css';
+// import 'react-mde/lib/styles/react-mde.css';
+// import 'react-mde/lib/styles/react-mde-command-styles.css';
+// import 'react-mde/lib/styles/markdown-default-theme.css';
 
 class CreateSnippet extends React.Component {
     constructor(props) {
@@ -52,7 +52,7 @@ class CreateSnippet extends React.Component {
 
     render() { 
 
-      let commands = ReactMdeCommands.getDefaultCommands()
+      // let commands = ReactMdeCommands.getDefaultCommands()
 
     // console.log(this.props.snippetName, this.props.snippetBody);
     let snippetStyle = {
@@ -68,18 +68,18 @@ class CreateSnippet extends React.Component {
         <section className='add-code' style={snippetStyle}>
             <form onSubmit={this.handleSubmit}> 
               <input type="text" name="snippetName" placeholder="Title of snippet" onChange={this.handleChange} value={this.state.snippetName}/>
-              {/* <div className="container"> */}
-                <ReactMde
+               {/*<div className="container"> 
+                 <ReactMde
                     textareaId="ta1"
                     textareaName="ta1"
                     value={this.state.snippetBody}
                     onChange={this.handleChange}
                     commands={commands} />
-              {/* </div> */}
+              </div>  */}
 
 
 
-              {/* <textarea type="text" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} /> */}
+              <textarea type="text" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} /> 
               <button>Add Code Snippet</button>
             </form>
         </section>
