@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
-import firebase from '../firebase.js'
+import firebase from '../firebase.js';
+import Masonry from 'react-masonry-component';
 
 class Snippet extends React.Component {
 
@@ -12,7 +13,8 @@ class Snippet extends React.Component {
 
     render() { 
         return ( 
-            <section className='display-snippet'>
+        
+            <li className='display-snippet'>
             <div className='wrapper'>
               <ul>
                   <li key={this.props.id}>
@@ -22,7 +24,8 @@ class Snippet extends React.Component {
                   </li>
               </ul>
             </div>
-          </section> 
+          </li> 
+
 
          )
     }

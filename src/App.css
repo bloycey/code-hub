@@ -53,7 +53,7 @@
   padding: 60px 18px;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12), 0 1px 8px 0 rgba(0,0,0,.2);
   margin-bottom: 34px;  
-  width: 25%;
+  width: 400px;
   margin-right: auto;
 }
 
@@ -122,6 +122,19 @@ button {
   font-size: 14px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   padding: 10px 6px;
+}
+
+button.openModalBtn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  padding: 0px;
+  min-width: initial;
+  font-size: 30px;
+  z-index: 9999;
 }
 
 /***************/

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import firebase from './firebase.js'
+import firebase from './firebase.js';
+import Masonry from 'react-masonry-component';
 import CreateSnippet from './components/createSnippet';
 import Snippet from './components/snippets';
 import Modal from './components/modal';
@@ -10,11 +11,12 @@ class App extends Component {
     super();
     this.state = {
       snips: [],
-      modalOpen: false
+      modalOpen: false,
+      masonryOptions: {columnWidth: 5}
     }
 
     this._toggleModal = this._toggleModal.bind(this);
-
+ 
   }
 
   componentDidMount() {
@@ -77,7 +79,7 @@ class App extends Component {
       <main role="main" className="col-sm-9 ml-sm-auto col-md-10 pt-3">
         <h1>Dashboard</h1>
       
-        <button onClick={this._toggleModal}>Open Modal</button>
+        <button className="openModalBtn" onClick={this._toggleModal}>+</button>
 
        
        <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
@@ -86,13 +88,27 @@ class App extends Component {
 
         </Modal>
          
-        {this.state.snips.map((snip) => {
-          return (
-            <span key={snip.id}>
+    
+          
+            <Masonry
+            className={'my-gallery-class'} // default ''
+            elementType={'ul'} // default 'div'
+            options={this.state.masonryOptions}
+            disableImagesLoaded={false} // default false
+            updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+        >
+
+            {this.state.snips.map((snip) => {
+           return (
+            // <span key={snip.id}>
             <Snippet id={snip.id} title={snip.title} body={snip.body} />
-           </span>
-          )
-        })}
+          //  </span>
+
+          )})}
+
+           </Masonry>
+          
+        
         
 
       </main>
@@ -107,6 +123,7 @@ class App extends Component {
     this.setState({ 
         modalOpen: !this.state.modalOpen });
 }
+
 
 
 }
