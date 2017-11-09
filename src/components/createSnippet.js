@@ -1,11 +1,7 @@
 import React from 'react';
 import '../App.css';
 import firebase from '../firebase.js';
-// import { ReactMde, ReactMdeCommands } from 'react-mde';
-// import 'font-awesome/css/font-awesome.css';
-// import 'react-mde/lib/styles/react-mde.css';
-// import 'react-mde/lib/styles/react-mde-command-styles.css';
-// import 'react-mde/lib/styles/markdown-default-theme.css';
+import Textarea from "react-textarea-autosize";
 
 class CreateSnippet extends React.Component {
     constructor(props) {
@@ -13,7 +9,9 @@ class CreateSnippet extends React.Component {
         this.state = {
             snippetName: '',
             snippetBody: '',
-            mdeValue: {text: "", selection: null}
+            textAreaStyles: {
+              height: '50px'
+            }
           }
 
           this.handleChange = this.handleChange.bind(this);
@@ -22,15 +20,11 @@ class CreateSnippet extends React.Component {
 
     handleChange(e) {
         this.setState({
-          snippetBody: e.target.value
+          [e.target.name]: e.target.value
         });
       }
 
-    //   handleValueChange(value) {
-    //     this.setState({mdeValue: value});
-    // }
-
-      
+   
 
       handleSubmit(e) {
         e.preventDefault();
@@ -46,13 +40,24 @@ class CreateSnippet extends React.Component {
         });
       }
 
-      
+      // textAreaAdjust() {
+      //   let scrollHeight = document.getElementById("codeArea").scrollHeight;
+      //   console.log(scrollHeight);
+      //   this.setState({
+      //     textAreaStyles: {
+      //       height: "1px"
+      //     },
+
+      //     textAreaStyles: {
+      //       height: (25+scrollHeight)+"px"
+      //     } 
+      //   });
+      // }
 
 
 
     render() { 
 
-      // let commands = ReactMdeCommands.getDefaultCommands()
 
     // console.log(this.props.snippetName, this.props.snippetBody);
     let snippetStyle = {
@@ -68,18 +73,7 @@ class CreateSnippet extends React.Component {
         <section className='add-code' style={snippetStyle}>
             <form onSubmit={this.handleSubmit}> 
               <input type="text" name="snippetName" placeholder="Title of snippet" onChange={this.handleChange} value={this.state.snippetName}/>
-               {/*<div className="container"> 
-                 <ReactMde
-                    textareaId="ta1"
-                    textareaName="ta1"
-                    value={this.state.snippetBody}
-                    onChange={this.handleChange}
-                    commands={commands} />
-              </div>  */}
-
-
-
-              <textarea type="text" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} /> 
+             <Textarea type="text" id="codeArea" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} onKeyUp={this.textAreaAdjust} style={this.state.textAreaStyles} />
               <button>Add Code Snippet</button>
             </form>
         </section>
@@ -87,7 +81,7 @@ class CreateSnippet extends React.Component {
          )
     }
 
-  
+ 
 
 
 }

@@ -137,6 +137,10 @@ button.openModalBtn {
   z-index: 9999;
 }
 
+.add-code textarea {
+  height: 50px;
+}
+
 /***************/
 
 @keyframes App-logo-spin {
