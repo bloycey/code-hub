@@ -7,8 +7,8 @@ class CreateSnippet extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            snippetName: '',
-            snippetBody: '',
+            snippetName: this.props.snippetName,
+            snippetBody: this.props.snippetBody,
             textAreaStyles: {
               height: '50px'
             }
@@ -40,30 +40,16 @@ class CreateSnippet extends React.Component {
         });
       }
 
-      // textAreaAdjust() {
-      //   let scrollHeight = document.getElementById("codeArea").scrollHeight;
-      //   console.log(scrollHeight);
-      //   this.setState({
-      //     textAreaStyles: {
-      //       height: "1px"
-      //     },
-
-      //     textAreaStyles: {
-      //       height: (25+scrollHeight)+"px"
-      //     } 
-      //   });
-      // }
-
 
 
     render() { 
 
 
-    // console.log(this.props.snippetName, this.props.snippetBody);
+
     let snippetStyle = {
       width: '80%',
       marginLeft: '10%',
-      marginTop: '200px',
+      marginTop: '100px',
       zIndex: 9000
     }
         return ( 
@@ -74,7 +60,7 @@ class CreateSnippet extends React.Component {
             <form onSubmit={this.handleSubmit}> 
               <input type="text" name="snippetName" placeholder="Title of snippet" onChange={this.handleChange} value={this.state.snippetName}/>
              <Textarea type="text" id="codeArea" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} onKeyUp={this.textAreaAdjust} style={this.state.textAreaStyles} />
-              <button>Add Code Snippet</button>
+              <button type="Submit">Add Code Snippet</button>
             </form>
         </section>
 

@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     const itemsRef = firebase.database().ref('snippets');
     itemsRef.on('value', (snapshot) => {
       let snips = snapshot.val();
@@ -41,7 +42,7 @@ class App extends Component {
     
     
     return (
-      <div>
+      <div id="app-wrapper">
       
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       
@@ -84,7 +85,7 @@ class App extends Component {
        
        <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
         
-        <CreateSnippet />
+        <CreateSnippet snippetName='Descriptive title here' snippetBody='Write your code here. Markdown is supported!' />
 
         </Modal>
          
@@ -101,7 +102,7 @@ class App extends Component {
             {this.state.snips.map((snip) => {
            return (
             // <span key={snip.id}>
-            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} />
+            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} _toggleModal={this._toggleModal.bind(this)}/>
             // </span>
 
           )})}

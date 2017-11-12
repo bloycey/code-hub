@@ -13,10 +13,11 @@ export class Modal extends React.Component {
 
         
         if(this.props.status == false){
+            document.body.style.overflow = "auto";
             return null;
         };
         
-        
+        document.body.style.overflow = "hidden";
 
         let modalStyle = {
             position: 'fixed',
@@ -26,6 +27,7 @@ export class Modal extends React.Component {
             bottom: 0,
             backgroundColor: 'rgba(52, 52, 52, 0.8)',
             zIndex: 8000,
+            overflowY: 'scroll'
         };
 
 
