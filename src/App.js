@@ -12,7 +12,9 @@ class App extends Component {
     this.state = {
       snips: [],
       modalOpen: false,
-      masonryOptions: {columnWidth: 5}
+      masonryOptions: 
+      {columnWidth: 5,
+      originTop: false}
     }
 
     this._toggleModal = this._toggleModal.bind(this);
@@ -97,6 +99,7 @@ class App extends Component {
             options={this.state.masonryOptions}
             disableImagesLoaded={false} // default false
             updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+            originTop={false}
         >
 
             {this.state.snips.map((snip) => {
