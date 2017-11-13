@@ -7,6 +7,9 @@ export class Modal extends React.Component {
         this.state = {
             
           }
+
+
+          
     }
 
     render() { 

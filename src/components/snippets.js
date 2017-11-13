@@ -18,16 +18,17 @@ class Snippet extends React.Component {
 
       }
 
-      _editToggleModal(event){
-        event.preventDefault();
-        this.setState({ 
-            editModalOpen: !this.state.editModalOpen });
-    }
 
     removeItem(snipId) {
         const itemRef = firebase.database().ref(`/snippets/${snipId}`);
         itemRef.remove();
       } 
+
+    editItem(snipId) {
+        this.editToggleModal;
+        
+
+    }
 
     render() { 
 
@@ -42,9 +43,10 @@ class Snippet extends React.Component {
                   <button onClick={() => this.removeItem(this.props.id)}>Remove Item</button>
                   <button onClick={this._editToggleModal}>Edit Item</button>
 
+
                   <Modal status={this.state.editModalOpen} _toggleModal={this._editToggleModal}>
         
-                    <CreateSnippet snippetName={this.props.title} snippetBody={this.props.body} />
+                    <CreateSnippet snippetName={this.props.title} snippetBody={this.props.body} _toggleModal={this._editToggleModal} _removeId={this.props.id} />
 
                 </Modal>
 
@@ -56,7 +58,11 @@ class Snippet extends React.Component {
          )
     }
 
- 
+    _editToggleModal(event){
+        // event.preventDefault();
+        this.setState({ 
+            editModalOpen: !this.state.editModalOpen });
+    }
 
 }
  

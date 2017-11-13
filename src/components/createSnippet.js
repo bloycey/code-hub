@@ -16,6 +16,7 @@ class CreateSnippet extends React.Component {
 
           this.handleChange = this.handleChange.bind(this);
           this.handleSubmit = this.handleSubmit.bind(this);
+          this.removeItem = this.removeItem.bind(this);
     }
 
     handleChange(e) {
@@ -24,7 +25,10 @@ class CreateSnippet extends React.Component {
         });
       }
 
-   
+      removeItem(snipId) {
+        const itemRef = firebase.database().ref(`/snippets/${snipId}`);
+        itemRef.remove();
+      } 
 
       handleSubmit(e) {
         e.preventDefault();
@@ -38,6 +42,16 @@ class CreateSnippet extends React.Component {
           snipetName: '',
           snippetBody: ''
         });
+
+        if (this.props._toggleModal) {        
+        this.props._toggleModal();
+        }
+
+        if (this.props._removeId) {
+          this.removeItem(this.props._removeId)
+        }
+
+
       }
 
 
@@ -57,10 +71,10 @@ class CreateSnippet extends React.Component {
          
 
         <section className='add-code' style={snippetStyle}>
-            <form onSubmit={this.handleSubmit}> 
-              <input type="text" name="snippetName" placeholder="Title of snippet" onChange={this.handleChange} value={this.state.snippetName}/>
+            <form> 
+              <input type="text" name="snippetName" placeholder="Title of snippet" onChange={this.handleChange} value={this.state.snippetName} />
              <Textarea type="text" id="codeArea" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} onKeyUp={this.textAreaAdjust} style={this.state.textAreaStyles} />
-              <button type="Submit">Add Code Snippet</button>
+              <button type="Submit" onClick={this.handleSubmit}>Add Code Snippet</button>
             </form>
         </section>
 

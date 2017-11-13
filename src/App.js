@@ -122,7 +122,6 @@ class App extends Component {
   }
 
   _toggleModal(event){
-    event.preventDefault();
     this.setState({ 
         modalOpen: !this.state.modalOpen });
 }
