@@ -87,32 +87,31 @@ class App extends Component {
        
        <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
         
-        <CreateSnippet snippetName='Descriptive title here' snippetBody='Write your code here. Markdown is supported!' />
+        <CreateSnippet snippetName='' snippetBody='' _toggleModal={this._toggleModal.bind(this)}/>
 
         </Modal>
          
     
-          
-            <Masonry
+          <div className="grid-wrapper">
+            {/* <Masonry
             className={'my-gallery-class'} // default ''
             elementType={'ul'} // default 'div'
             options={this.state.masonryOptions}
             disableImagesLoaded={false} // default false
             updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
             originTop={false}
-        >
-
+        > */}
             {this.state.snips.map((snip) => {
            return (
             // <span key={snip.id}>
-            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} _toggleModal={this._toggleModal.bind(this)}/>
+            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} _toggleModal={this._toggleModal.bind(this)} />
             // </span>
 
           )})}
 
-           </Masonry>
+           {/* </Masonry> */}
           
-        
+           </div>
         
 
       </main>

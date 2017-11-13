@@ -46,6 +46,11 @@
 
 /*****************/
 
+.grid-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .add-code, .display-snippet {
   border-radius: 2px;
   margin-right: 50px;
