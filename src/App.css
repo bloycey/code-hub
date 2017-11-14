@@ -46,6 +46,13 @@
 
 /*****************/
 
+ul ul, ol ul {
+  list-style-type: disc;
+}
+
+.remove-btn {
+  margin-right: 5px;
+}
 /*.grid-wrapper {
   display: flex;
   flex-direction: column-reverse;
@@ -56,7 +63,7 @@
   border-radius: 2px;
   margin-right: 50px;
   background-color: rgb(237, 237, 237);
-  padding: 60px 18px;
+  padding: 35px 18px;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12), 0 1px 8px 0 rgba(0,0,0,.2);
   margin-bottom: 34px;  
   width: 40%;
@@ -146,6 +153,20 @@ button.openModalBtn {
 .add-code textarea {
   height: 50px;
 }
+
+.add-code .preview-panel ul {
+  display: block;
+}
+
+.preview-panel ul li {
+  width: auto;
+  box-shadow: none;
+  list-style-type: disc;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+
 
 /***************/
 

@@ -39,9 +39,10 @@ class Snippet extends React.Component {
             <div className='wrapper' key={this.props.id}>
             
                   <h3>{this.props.title}</h3>
-                  <div><ReactMarkdown source={this.props.body}  options={{escapeHtml: false}}/></div>
-                  <button onClick={() => this.removeItem(this.props.id)}>Remove Item</button>
-                  <button onClick={this._editToggleModal}>Edit Item</button>
+                  <div><ReactMarkdown source={this.props.body}  options={{escapeHtml: false}}  softBreak="br"/></div>
+                  <hr/>
+                  <button className="remove-btn" onClick={() => this.removeItem(this.props.id)}>Remove Code Snippet</button>
+                  <button className="edit-btn"onClick={this._editToggleModal}>Edit Code Snippet</button>
 
 
                   <Modal status={this.state.editModalOpen} _toggleModal={this._editToggleModal}>

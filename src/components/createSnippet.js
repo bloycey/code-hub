@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import firebase from '../firebase.js';
 import Textarea from "react-textarea-autosize";
+var ReactMarkdown = require('react-markdown');
 
 class CreateSnippet extends React.Component {
     constructor(props) {
@@ -57,6 +58,14 @@ class CreateSnippet extends React.Component {
 
 
     render() { 
+
+      let snippetBtn;
+      if(this.props._removeId) {
+        snippetBtn = "Edit Snippet"
+      } else {
+        snippetBtn = "Add Snippet"
+      }
+
              
     let snippetStyle = {
       width: '80%',
@@ -72,7 +81,11 @@ class CreateSnippet extends React.Component {
             <form> 
               <input type="text" name="snippetName" placeholder="Title of snippet" onChange={this.handleChange} value={this.state.snippetName} />
              <Textarea type="text" id="codeArea" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} style={this.state.textAreaStyles} />
-              <button type="Submit" onClick={this.handleSubmit}>Add Snippet</button>
+              <hr/>
+              <div className="preview-panel">
+              <ReactMarkdown source={this.state.snippetBody}  options={{escapeHtml: false, softBreak: "br"}} softBreak="br"/>
+              </div>
+              <button type="Submit" onClick={this.handleSubmit}>{snippetBtn}</button>
             </form>
         </section>
 

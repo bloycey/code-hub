@@ -13,6 +13,7 @@
     "react-materialize": "^1.0.16",
     "react-mde": "^1.0.3",
     "react-scripts": "1.0.14",
+    "react-textarea-autosize": "^5.2.1",
     "showdown": "^1.8.1"
   },
   "scripts": {

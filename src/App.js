@@ -13,7 +13,7 @@ class App extends Component {
       snips: [],
       modalOpen: false,
       masonryOptions: 
-      {columnWidth: 5}
+      {columnWidth: 3}
     }
 
     this._toggleModal = this._toggleModal.bind(this);
@@ -120,6 +120,7 @@ class App extends Component {
   }
 
   _toggleModal(event){
+    document.body.style.overflow = "auto";
     this.setState({ 
         modalOpen: !this.state.modalOpen });
 }
