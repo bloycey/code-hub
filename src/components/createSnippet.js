@@ -50,16 +50,14 @@ class CreateSnippet extends React.Component {
         if (this.props._removeId) {
           this.removeItem(this.props._removeId)
         }
-
-
       }
+
+     
 
 
 
     render() { 
-
-
-
+             
     let snippetStyle = {
       width: '80%',
       marginLeft: '10%',
@@ -73,8 +71,8 @@ class CreateSnippet extends React.Component {
         <section className='add-code' style={snippetStyle}>
             <form> 
               <input type="text" name="snippetName" placeholder="Title of snippet" onChange={this.handleChange} value={this.state.snippetName} />
-             <Textarea type="text" id="codeArea" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} onKeyUp={this.textAreaAdjust} style={this.state.textAreaStyles} />
-              <button type="Submit" onClick={this.handleSubmit}>Add Code Snippet</button>
+             <Textarea type="text" id="codeArea" name="snippetBody" placeholder="Snippet body" onChange={this.handleChange} value={this.state.snippetBody} style={this.state.textAreaStyles} />
+              <button type="Submit" onClick={this.handleSubmit}>Add Snippet</button>
             </form>
         </section>
 

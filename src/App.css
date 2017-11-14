@@ -46,11 +46,11 @@
 
 /*****************/
 
-.grid-wrapper {
+/*.grid-wrapper {
   display: flex;
   flex-direction: column-reverse;
-  flex-wrap: wrap;
-}
+  flex-wrap: wrap; 
+} */
 
 .add-code, .display-snippet {
   border-radius: 2px;

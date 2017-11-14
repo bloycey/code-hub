@@ -13,8 +13,7 @@ class App extends Component {
       snips: [],
       modalOpen: false,
       masonryOptions: 
-      {columnWidth: 5,
-      originTop: false}
+      {columnWidth: 5}
     }
 
     this._toggleModal = this._toggleModal.bind(this);
@@ -28,7 +27,7 @@ class App extends Component {
       let snips = snapshot.val();
       let newState = [];
       for (let snip in snips) {
-        newState.push({
+        newState.unshift({
           id: snip,
           title: snips[snip].title,
           body: snips[snip].body
@@ -84,7 +83,7 @@ class App extends Component {
       
         <button className="openModalBtn" onClick={this._toggleModal}>+</button>
 
-       
+      
        <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
         
         <CreateSnippet snippetName='' snippetBody='' _toggleModal={this._toggleModal.bind(this)}/>
@@ -93,14 +92,13 @@ class App extends Component {
          
     
           <div className="grid-wrapper">
-            {/* <Masonry
+            <Masonry
             className={'my-gallery-class'} // default ''
             elementType={'ul'} // default 'div'
             options={this.state.masonryOptions}
             disableImagesLoaded={false} // default false
             updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-            originTop={false}
-        > */}
+        >
             {this.state.snips.map((snip) => {
            return (
             // <span key={snip.id}>
@@ -109,11 +107,11 @@ class App extends Component {
 
           )})}
 
-           {/* </Masonry> */}
+           </Masonry>
           
            </div>
         
-
+      
       </main>
     </div>
   </div>
