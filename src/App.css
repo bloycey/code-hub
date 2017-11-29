@@ -166,7 +166,14 @@ button.openModalBtn {
   margin-left: 20px;
 }
 
+/* .add-code input.upload-group, .add-code button.upload-group {
+  width: 50%;
+  display: inline-block;
+} */
 
+img {
+  max-width: 100%;
+}
 
 /***************/
 

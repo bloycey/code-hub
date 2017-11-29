@@ -21,11 +21,11 @@ export class Modal extends React.Component {
             return null;
         };
 
-        if(document.body.style.overflow = "auto") {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "auto";
-        }
+        // if(document.body.style.overflow = "auto") {
+        //     document.body.style.overflow = "hidden";
+        // } else {
+        //     document.body.style.overflow = "auto";
+        // }
         
         // document.body.style.overflowY = "hidden";
 

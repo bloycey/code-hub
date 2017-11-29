@@ -26,8 +26,6 @@ class Snippet extends React.Component {
 
     editItem(snipId) {
         this.editToggleModal;
-        
-
     }
 
     render() { 
@@ -63,6 +61,7 @@ class Snippet extends React.Component {
         // event.preventDefault();
         this.setState({ 
             editModalOpen: !this.state.editModalOpen });
+
     }
 
 }
