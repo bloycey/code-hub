@@ -7,27 +7,17 @@ export class Modal extends React.Component {
         this.state = {
             
           }
-
-
           
     }
 
     render() { 
-
-       
+    
         
         if(this.props.status == false){
         
             return null;
         };
 
-        // if(document.body.style.overflow = "auto") {
-        //     document.body.style.overflow = "hidden";
-        // } else {
-        //     document.body.style.overflow = "auto";
-        // }
-        
-        // document.body.style.overflowY = "hidden";
 
         let modalStyle = {
             position: 'fixed',

@@ -10,6 +10,7 @@ class CreateSnippet extends React.Component {
         this.state = {
             snippetName: this.props.snippetName,
             snippetBody: this.props.snippetBody,
+            snippetImages: [],
             textAreaStyles: {
               height: '50px'
             },
@@ -18,8 +19,9 @@ class CreateSnippet extends React.Component {
           this.handleSubmit = this.handleSubmit.bind(this);
           this.removeItem = this.removeItem.bind(this);
           this.handleUpload = this.handleUpload.bind(this);
-          
+
     }
+
 
     handleUpload(event){
       let file = event.target.files[0];
@@ -49,21 +51,37 @@ class CreateSnippet extends React.Component {
       }, function(error) {
         alert("Something went wrong");
       }, function() {
+
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        var downloadURL = uploadTask.snapshot.downloadURL;
+        let downloadURL = uploadTask.snapshot.downloadURL;
+        // this.setState({ snippetImages: [...this.state.snippetImages, downloadURL] })
+        
+        this.setState({ snippetImages: [...this.state.snippetImages, downloadURL] })
         prompt("Copy to clipboard and paste where you'd like the image to appear!", "![](" + downloadURL + ")");
-        console.log(downloadURL);
-});
+        // let postKey = firebase.database().ref('snippets').push().key;
+        // let updates = {};
+        // let postData = {
+        //   url: downloadURL
+        // }
+        // updates['snippets/' + postKey] = postData;
+        // firebase.database().ref().update(updates);
+        // console.log(downloadURL);
+}.bind(this));
 
     }
 
+  
 
     handleChange(e) {
         this.setState({
           [e.target.name]: e.target.value
         });
       }
+
+      pushImage(imageURL) {
+        this.setState({ snippetImages: [...this.state.snippetImages, imageURL] })
+      };
 
       removeItem(snipId) {
         const itemRef = firebase.database().ref(`/snippets/${snipId}`);
@@ -75,12 +93,14 @@ class CreateSnippet extends React.Component {
         const itemsRef = firebase.database().ref('snippets');
         const snippet = {
           title: this.state.snippetName,
-          body: this.state.snippetBody
+          body: this.state.snippetBody,
+          images: this.state.snippetImages
         }
         itemsRef.push(snippet);
         this.setState({
           snipetName: '',
-          snippetBody: ''
+          snippetBody: '',
+          snippetImages: []
         });
 
         if (this.props._toggleModal) {        
@@ -98,14 +118,15 @@ class CreateSnippet extends React.Component {
 
     render() { 
 
+     
+
       let snippetBtn;
       if(this.props._removeId) {
         snippetBtn = "Edit Snippet"
       } else {
         snippetBtn = "Add Snippet"
-      }
-
-             
+      } 
+      
     let snippetStyle = {
       width: '80%',
       marginLeft: '10%',

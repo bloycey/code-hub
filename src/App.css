@@ -53,11 +53,7 @@ ul ul, ol ul {
 .remove-btn {
   margin-right: 5px;
 }
-/*.grid-wrapper {
-  display: flex;
-  flex-direction: column-reverse;
-  flex-wrap: wrap; 
-} */
+
 
 .add-code, .display-snippet {
   border-radius: 2px;
@@ -166,10 +162,6 @@ button.openModalBtn {
   margin-left: 20px;
 }
 
-/* .add-code input.upload-group, .add-code button.upload-group {
-  width: 50%;
-  display: inline-block;
-} */
 
 img {
   max-width: 100%;
