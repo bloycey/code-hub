@@ -53,20 +53,11 @@ class CreateSnippet extends React.Component {
 
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        let downloadURL = uploadTask.snapshot.downloadURL;
-        // this.setState({ snippetImages: [...this.state.snippetImages, downloadURL] })
-        
+        let downloadURL = uploadTask.snapshot.downloadURL; 
         this.setState({ snippetImages: [...this.state.snippetImages, filename] })
-        //  this.setState({ snippetImages: filename })
+       
         prompt("Copy to clipboard and paste where you'd like the image to appear!", "![](" + downloadURL + ")");
-        // let postKey = firebase.database().ref('snippets').push().key;
-        // let updates = {};
-        // let postData = {
-        //   url: downloadURL
-        // }
-        // updates['snippets/' + postKey] = postData;
-        // firebase.database().ref().update(updates);
-        // console.log(downloadURL);
+  
 }.bind(this));
 
     }
@@ -103,7 +94,7 @@ class CreateSnippet extends React.Component {
         }
 
         if (this.props._removeId) {
-          this.removeItem(this.props._removeId)
+          this.props.removeItem(this.props._removeId, this.props._images);
         }
       }
 
