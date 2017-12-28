@@ -47,7 +47,7 @@ class CreateSnippet extends React.Component {
             break;
         }
       }, function(error) {
-        alert("Shits fucked");
+        alert("Something went wrong");
       }, function() {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
