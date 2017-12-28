@@ -17,7 +17,6 @@ class CreateSnippet extends React.Component {
           }
           this.handleChange = this.handleChange.bind(this);
           this.handleSubmit = this.handleSubmit.bind(this);
-          this.removeItem = this.removeItem.bind(this);
           this.handleUpload = this.handleUpload.bind(this);
 
     }
@@ -25,7 +24,7 @@ class CreateSnippet extends React.Component {
 
     handleUpload(event){
       let file = event.target.files[0];
-      let filename = file.name;
+      let filename = file.name.toString();
       console.log(filename);
 
       let storageRef = firebase.storage().ref('/snippetImages/' + filename);
@@ -57,7 +56,8 @@ class CreateSnippet extends React.Component {
         let downloadURL = uploadTask.snapshot.downloadURL;
         // this.setState({ snippetImages: [...this.state.snippetImages, downloadURL] })
         
-        this.setState({ snippetImages: [...this.state.snippetImages, downloadURL] })
+        this.setState({ snippetImages: [...this.state.snippetImages, filename] })
+        //  this.setState({ snippetImages: filename })
         prompt("Copy to clipboard and paste where you'd like the image to appear!", "![](" + downloadURL + ")");
         // let postKey = firebase.database().ref('snippets').push().key;
         // let updates = {};
@@ -83,11 +83,6 @@ class CreateSnippet extends React.Component {
         this.setState({ snippetImages: [...this.state.snippetImages, imageURL] })
       };
 
-      removeItem(snipId) {
-        const itemRef = firebase.database().ref(`/snippets/${snipId}`);
-        itemRef.remove();
-      } 
-
       handleSubmit(e) {
         e.preventDefault();
         const itemsRef = firebase.database().ref('snippets');
@@ -111,9 +106,6 @@ class CreateSnippet extends React.Component {
           this.removeItem(this.props._removeId)
         }
       }
-
-     
-
 
 
     render() { 
@@ -153,12 +145,8 @@ class CreateSnippet extends React.Component {
               <button type="Submit" onClick={this.handleSubmit}>{snippetBtn}</button>
             </form>
         </section>
-
          )
     }
-
- 
-
 
 }
  

@@ -15,14 +15,23 @@ class Snippet extends React.Component {
         }
     
         this._editToggleModal = this._editToggleModal.bind(this);
-
+        this.removeItem = this.removeItem.bind(this);
       }
 
 
-    removeItem(snipId) {
+    removeItem(snipId, images) {
+    
+        if (images !== undefined && images !== '') {
+            let allImages = images.toString().split(",");
+            for (var i in allImages){
+                let storageRef = firebase.storage().ref('/snippetImages/'+allImages[i]);
+                storageRef.delete()
+            }
+        }
+
         const itemRef = firebase.database().ref(`/snippets/${snipId}`);
         itemRef.remove();
-      } 
+      }
 
     editItem(snipId) {
         this.editToggleModal;
@@ -39,8 +48,8 @@ class Snippet extends React.Component {
                   <h3>{this.props.title}</h3>
                   <div><ReactMarkdown source={this.props.body}  options={{escapeHtml: false}}  softBreak="br"/></div>
                   <hr/>
-                  <button className="remove-btn" onClick={() => this.removeItem(this.props.id)}>Remove Code Snippet</button>
-                  <button className="edit-btn"onClick={this._editToggleModal}>Edit Code Snippet</button>
+                  <button className="remove-btn" onClick={() => this.removeItem(this.props.id, this.props.images)}>Remove Code Snippet</button>
+                  <button className="edit-btn" onClick={this._editToggleModal}>Edit Code Snippet</button>
 
 
                   <Modal status={this.state.editModalOpen} _toggleModal={this._editToggleModal}>

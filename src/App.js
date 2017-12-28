@@ -30,7 +30,8 @@ class App extends Component {
         newState.unshift({
           id: snip,
           title: snips[snip].title,
-          body: snips[snip].body
+          body: snips[snip].body,
+          images: snips[snip].images
 
         });
       }
@@ -86,7 +87,7 @@ class App extends Component {
       
        <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
         
-        <CreateSnippet snippetName='' snippetBody='' _toggleModal={this._toggleModal.bind(this)}/>
+        <CreateSnippet snippetName='' snippetBody='' images='' _toggleModal={this._toggleModal.bind(this)}/>
 
         </Modal>
          
@@ -102,7 +103,7 @@ class App extends Component {
             {this.state.snips.map((snip) => {
            return (
             // <span key={snip.id}>
-            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} _toggleModal={this._toggleModal.bind(this)} />
+            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} images={snip.images} _toggleModal={this._toggleModal.bind(this)} />
             // </span>
 
           )})}
