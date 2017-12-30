@@ -48,7 +48,8 @@ class Snippet extends React.Component {
             <li className='display-snippet'>
             <div className='wrapper' key={this.props.id}>
             
-                  <h3>{this.props.title} - {this.props.category}</h3>
+                  <h3>{this.props.title}</h3>
+                  <div className="category-container">{this.props.category}</div>
                   <div><ReactMarkdown source={this.props.body}  options={{escapeHtml: false}}  softBreak="br"/></div>
                   <hr/>
                   <button className="remove-btn" onClick={() => this.removeItem(this.props.id, this.props.images)}>Remove Code Snippet</button>

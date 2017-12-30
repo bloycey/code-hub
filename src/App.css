@@ -173,3 +173,23 @@ img {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.wrapper {
+  position: relative;
+}
+
+.category-container {
+  position: absolute;
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: blue;
+    color: #ffffff;
+    border-radius: 30px;
+    font-size: 12px;
+    right: 0;
+    top: 0;
+}
+
+.wrapper h3 {
+  max-width: 80%;
+}
