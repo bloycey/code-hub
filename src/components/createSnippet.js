@@ -11,6 +11,7 @@ class CreateSnippet extends React.Component {
             snippetName: this.props.snippetName,
             snippetBody: this.props.snippetBody,
             snippetImages: [],
+            snippetCategory: this.props.snippetCategory,
             textAreaStyles: {
               height: '50px'
             },
@@ -18,6 +19,7 @@ class CreateSnippet extends React.Component {
           this.handleChange = this.handleChange.bind(this);
           this.handleSubmit = this.handleSubmit.bind(this);
           this.handleUpload = this.handleUpload.bind(this);
+          this.setCategory = this.setCategory.bind(this);
 
     }
 
@@ -70,9 +72,14 @@ class CreateSnippet extends React.Component {
         });
       }
 
-      pushImage(imageURL) {
-        this.setState({ snippetImages: [...this.state.snippetImages, imageURL] })
-      };
+      setCategory(event) {
+        alert("option changed");
+        this.setState({ snippetCategory: event.target.value });
+    }
+
+      // pushImage(imageURL) {
+      //   this.setState({ snippetImages: [...this.state.snippetImages, imageURL] })
+      // };
 
       handleSubmit(e) {
         e.preventDefault();
@@ -80,13 +87,15 @@ class CreateSnippet extends React.Component {
         const snippet = {
           title: this.state.snippetName,
           body: this.state.snippetBody,
-          images: this.state.snippetImages
+          images: this.state.snippetImages,
+          category: this.state.snippetCategory
         }
         itemsRef.push(snippet);
         this.setState({
           snipetName: '',
           snippetBody: '',
-          snippetImages: []
+          snippetImages: [],
+          snippetCategory: 'Misc'
         });
 
         if (this.props._toggleModal) {        
@@ -128,7 +137,15 @@ class CreateSnippet extends React.Component {
             
               
               <input type="file" id="file" className="upload-group" onChange={this.handleUpload}/>
-            
+              
+              <select name="Select a Snippet Category" id="snippetCategory" onChange={this.setCategory}>
+              <option value="Misc">Misc</option>
+              <option value="Homepage" >Homepage</option>
+              <option value="Product Page">Product Page</option>
+              <option value="Category Page">Category Page</option>
+              <option value="Thumbnail">Thumbnail</option>
+              <option value="B@SE Quirks">B@SE Quirks</option>
+              </select>
               <hr/>
               <div className="preview-panel">
               <ReactMarkdown source={this.state.snippetBody}  options={{escapeHtml: false, softBreak: "br"}} softBreak="br"/>

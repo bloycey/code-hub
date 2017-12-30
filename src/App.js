@@ -17,7 +17,6 @@ class App extends Component {
     }
 
     this._toggleModal = this._toggleModal.bind(this);
- 
   }
 
   componentDidMount() {
@@ -31,7 +30,8 @@ class App extends Component {
           id: snip,
           title: snips[snip].title,
           body: snips[snip].body,
-          images: snips[snip].images
+          images: snips[snip].images,
+          category: snips[snip].category
 
         });
       }
@@ -40,6 +40,8 @@ class App extends Component {
       });
     });
   }
+
+
   render() {
     
     
@@ -87,7 +89,7 @@ class App extends Component {
       
        <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
         
-        <CreateSnippet snippetName='' snippetBody='' images='' _toggleModal={this._toggleModal.bind(this)}/>
+        <CreateSnippet snippetName='' snippetBody='' images='' category='' _toggleModal={this._toggleModal.bind(this)}/>
 
         </Modal>
          
@@ -103,7 +105,7 @@ class App extends Component {
             {this.state.snips.map((snip) => {
            return (
             // <span key={snip.id}>
-            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} images={snip.images} _toggleModal={this._toggleModal.bind(this)} />
+            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} images={snip.images} category={snip.category} _toggleModal={this._toggleModal.bind(this)} />
             // </span>
 
           )})}

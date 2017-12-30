@@ -11,11 +11,12 @@ class Snippet extends React.Component {
     constructor() {
         super();
         this.state = {
-            editModalOpen: false
+            editModalOpen: false,
         }
     
         this._editToggleModal = this._editToggleModal.bind(this);
         this.removeItem = this.removeItem.bind(this);
+        
       }
 
 
@@ -37,6 +38,8 @@ class Snippet extends React.Component {
         this.editToggleModal;
     }
 
+  
+
     render() { 
 
         
@@ -45,7 +48,7 @@ class Snippet extends React.Component {
             <li className='display-snippet'>
             <div className='wrapper' key={this.props.id}>
             
-                  <h3>{this.props.title}</h3>
+                  <h3>{this.props.title} - {this.props.category}</h3>
                   <div><ReactMarkdown source={this.props.body}  options={{escapeHtml: false}}  softBreak="br"/></div>
                   <hr/>
                   <button className="remove-btn" onClick={() => this.removeItem(this.props.id, this.props.images)}>Remove Code Snippet</button>
@@ -54,7 +57,7 @@ class Snippet extends React.Component {
 
                   <Modal status={this.state.editModalOpen} _toggleModal={this._editToggleModal}>
         
-                    <CreateSnippet snippetName={this.props.title} snippetBody={this.props.body} removeItem={this.removeItem} _images={this.props.images} _toggleModal={this._editToggleModal} _removeId={this.props.id} />
+                    <CreateSnippet snippetName={this.props.title} snippetBody={this.props.body}  snippetCategory={this.props.category} removeItem={this.removeItem} _images={this.props.images} _toggleModal={this._editToggleModal} _removeId={this.props.id} setCategory={this.props.setCategory} />
 
                 </Modal>
 
