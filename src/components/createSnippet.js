@@ -23,6 +23,12 @@ class CreateSnippet extends React.Component {
 
     }
 
+    componentDidMount() {
+      if(this.state.snippetCategory == undefined) {
+      this.setState({ snippetCategory: "Misc" });
+      }
+   }
+
 
     handleUpload(event){
       let file = event.target.files[0];
@@ -78,6 +84,7 @@ class CreateSnippet extends React.Component {
 
       handleSubmit(e) {
         e.preventDefault();
+
         const itemsRef = firebase.database().ref('snippets');
         const snippet = {
           title: this.state.snippetName,
@@ -90,7 +97,7 @@ class CreateSnippet extends React.Component {
           snipetName: '',
           snippetBody: '',
           snippetImages: [],
-          snippetCategory: 'Misc'
+          snippetCategory: ''
         });
 
         if (this.props._toggleModal) {        
