@@ -73,13 +73,8 @@ class CreateSnippet extends React.Component {
       }
 
       setCategory(event) {
-        alert("option changed");
         this.setState({ snippetCategory: event.target.value });
     }
-
-      // pushImage(imageURL) {
-      //   this.setState({ snippetImages: [...this.state.snippetImages, imageURL] })
-      // };
 
       handleSubmit(e) {
         e.preventDefault();
@@ -138,7 +133,7 @@ class CreateSnippet extends React.Component {
               
               <input type="file" id="file" className="upload-group" onChange={this.handleUpload}/>
               
-              <select name="Select a Snippet Category" id="snippetCategory" onChange={this.setCategory}>
+              <select name="Select a Snippet Category" id="snippetCategory" value={this.state.snippetCategory} onChange={this.setCategory}>
               <option value="Misc">Misc</option>
               <option value="Homepage" >Homepage</option>
               <option value="Product Page">Product Page</option>
