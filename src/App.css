@@ -105,7 +105,7 @@ ul ul, ol ul {
   padding: 0;
 }
 
-.add-code li {
+.add-code ul li {
   width: calc(50% - 50px);
   list-style-type: none;
   margin-right: 50px;
