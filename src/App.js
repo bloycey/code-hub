@@ -48,7 +48,7 @@ class App extends Component {
     return (
       <div id="app-wrapper">
       
-      <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <nav className="navbar navbar-expand-md navbar-dark fixed-top">
       
       <a className="navbar-brand" href="#">Code Hub</a>
       <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,8 +56,8 @@ class App extends Component {
       </button>
       <div className="collapse navbar-collapse" id="navbarsExampleDefault">
         <form className="form-inline search-wrapper mt-2 mt-md-0">
-          <input className="form-control mr-sm-2 search-bar" type="text" placeholder="Search" aria-label="Search"/>>
-          <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <input className="form-control mr-sm-2 search-bar" type="text" placeholder="Search" aria-label="Search"/>
+          <button className="btn primary-btn-ghost my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
     </nav>

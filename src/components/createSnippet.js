@@ -152,7 +152,7 @@ class CreateSnippet extends React.Component {
               <div className="preview-panel">
               <ReactMarkdown source={this.state.snippetBody}  options={{escapeHtml: false, softBreak: "br"}} softBreak="br"/>
               </div>
-              <button type="Submit" onClick={this.handleSubmit}>{snippetBtn}</button>
+              <button type="Submit" class="submit-btn" onClick={this.handleSubmit}>{snippetBtn}</button>
             </form>
         </section>
          )

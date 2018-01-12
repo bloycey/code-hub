@@ -44,6 +44,10 @@
   font-size: large;
 }
 
+.navbar.navbar-expand-md {
+  background-color: #083e52;
+}
+
 /*****************/
 
 ul ul, ol ul {
@@ -123,7 +127,6 @@ ul ul, ol ul {
 button {
   border-radius: 2px;
   min-width: 88px;
-  background-color: #FA6900;
   cursor: pointer;
   border: 0;
   min-width: 120px;
@@ -132,6 +135,46 @@ button {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   padding: 10px 6px;
 }
+
+.openModalBtn {
+    color: #fff;
+    background-color: #008768;
+    border-color: #008768;
+    transition: all 0.2s ease-in-out;
+}
+
+.openModalBtn:hover {
+  transform: translateY(-5px);
+}
+
+.primary-btn-ghost {
+  border: 1px solid #50E3C2;
+  background: transparent;
+  color: #50E3C2;
+}
+
+.primary-btn-ghost:hover {
+  background: #50E3C2;
+  color: #ffffff;
+}
+
+.remove-btn {
+  color: #ffffff;
+  background-color: #fb1659;
+}
+
+.remove-btn:hover {
+  color: #fff;
+    background-color: #97103b;
+    border-color: #720c2d;
+}
+
+.edit-btn, .submit-btn {
+  color: #fff;
+  background-color: #083E52;
+  border-color: #083E52;
+}
+
 
 button.openModalBtn {
   position: fixed;
@@ -182,7 +225,7 @@ img {
   position: absolute;
     display: inline-block;
     padding: 5px 15px;
-    background-color: blue;
+    background-color: #008768;
     color: #ffffff;
     border-radius: 30px;
     font-size: 12px;
@@ -192,4 +235,12 @@ img {
 
 .wrapper h3 {
   max-width: 80%;
+}
+
+.nav-link.active {
+  background-color: #083e52 !important;
+}
+
+a.nav-link {
+  color: #083e52; 
 }
