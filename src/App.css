@@ -244,3 +244,23 @@ img {
 a.nav-link {
   color: #083e52; 
 }
+
+#upload-progress {
+  border: 1px solid #083e52;
+  width: 100%;
+  margin-bottom: 20px;
+  height: 20px;
+  display: none;
+}
+
+#upload-indicator {
+  width: 0%;
+  background-color: #008768;
+  height: 100%;
+  display: block;
+}
+
+#upload-percentage {
+  width: 100%;
+  display: none;
+}
