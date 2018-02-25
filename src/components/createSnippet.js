@@ -37,6 +37,9 @@ class CreateSnippet extends React.Component {
 
       let storageRef = firebase.storage().ref('/snippetImages/' + filename);
       let uploadTask = storageRef.put(file);
+      let indicator =  document.getElementById("upload-indicator");
+      let uploadPercentage = document.getElementById("upload-percentage");
+      let uploadProgress = document.getElementById("upload-progress");
 
       // Register three observers:
       // 1. 'state_changed' observer, called any time the state changes
@@ -47,6 +50,11 @@ class CreateSnippet extends React.Component {
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');
+        uploadPercentage.style.display = "block";
+        uploadProgress.style.display = "block";
+        uploadPercentage.innerHTML = 'Upload ' + progress.toFixed(2) + '% complete';  
+        indicator.style.width = progress + "%";
+
         switch (snapshot.state) {
           case firebase.storage.TaskState.PAUSED: // or 'paused'
             console.log('Upload is paused');
@@ -57,8 +65,11 @@ class CreateSnippet extends React.Component {
         }
       }, function(error) {
         alert("Something went wrong");
+        uploadPercentage.style.display = "none";
+        uploadProgress.style.display = "none";
       }, function() {
-
+        uploadPercentage.style.display = "none";
+        uploadProgress.style.display = "none";
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         let downloadURL = uploadTask.snapshot.downloadURL; 
@@ -139,6 +150,8 @@ class CreateSnippet extends React.Component {
             
               
               <input type="file" id="file" className="upload-group" onChange={this.handleUpload}/>
+              <div id="upload-progress"><div id="upload-indicator"></div></div>
+              <div id="upload-percentage" class="text-center"></div>
               
               <select name="Select a Snippet Category" id="snippetCategory" value={this.state.snippetCategory} onChange={this.setCategory}>
               <option value="Misc">Misc</option>
