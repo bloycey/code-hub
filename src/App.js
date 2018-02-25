@@ -4,6 +4,7 @@ import Masonry from 'react-masonry-component';
 import CreateSnippet from './components/createSnippet';
 import Snippet from './components/snippets';
 import Modal from './components/modal';
+import Search from './components/search';
 import './App.css';
 
 class App extends Component {
@@ -41,6 +42,42 @@ class App extends Component {
     });
   }
 
+  searchSnips(query) {
+
+    const itemsRef = firebase.database().ref('snippets');
+    itemsRef.once('value', (snapshot) => {
+      let snips = snapshot.val();
+      let newState = [];
+      for (let snip in snips) {
+        newState.unshift({
+          id: snip,
+          title: snips[snip].title,
+          body: snips[snip].body,
+          images: snips[snip].images,
+          category: snips[snip].category
+        });
+      }
+      this.setState({
+        snips: newState
+      });
+      console.log("state refreshed")
+    });
+
+    if(query !== '') {
+
+      let snaps = this.state.snips.filter((snap) =>
+      {
+        return snap.title.includes(query)
+      });
+      console.log(query);
+      console.log(snaps);
+
+      this.setState({snips: snaps})
+
+    }
+    }
+  
+
 
   render() {
     
@@ -55,10 +92,7 @@ class App extends Component {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarsExampleDefault">
-        <form className="form-inline search-wrapper mt-2 mt-md-0">
-          <input className="form-control mr-sm-2 search-bar" type="text" placeholder="Search" aria-label="Search"/>
-          <button className="btn primary-btn-ghost my-2 my-sm-0" type="submit">Search</button>
-        </form>
+      <Search searchSnips={this.searchSnips.bind(this)}/>
       </div>
     </nav>
 
