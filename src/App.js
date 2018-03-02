@@ -45,9 +45,12 @@ class App extends Component {
   searchSnips(query) {
 
     const itemsRef = firebase.database().ref('snippets');
+    let newState = [];
+    this.setState({snips: null});
+
     itemsRef.once('value', (snapshot) => {
       let snips = snapshot.val();
-      let newState = [];
+      
       for (let snip in snips) {
         newState.unshift({
           id: snip,
@@ -57,31 +60,27 @@ class App extends Component {
           category: snips[snip].category
         });
       }
-      this.setState({
-        snips: newState
-      });
-      console.log("state refreshed")
     });
 
+
     if(query !== '') {
-
-      let snaps = this.state.snips.filter((snap) =>
-      {
-        return snap.title.includes(query)
-      });
-      console.log(query);
-      console.log(snaps);
-
-      this.setState({snips: snaps})
-
+      let totalresults = [];
+      for (let result in newState) {
+        const title = newState[result].title;
+        if (title.indexOf(query) >= 0) {
+          totalresults.push(newState[result]);
+        }
+      }
+      this.setState({snips: totalresults});
+    } else {
+      this.setState({snips: newState});
     }
-    }
+  } 
   
 
 
   render() {
-    
-    
+
     return (
       <div id="app-wrapper">
       
