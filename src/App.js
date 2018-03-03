@@ -5,19 +5,25 @@ import CreateSnippet from './components/createSnippet';
 import Snippet from './components/snippets';
 import Modal from './components/modal';
 import Search from './components/search';
+import Category from './components/category';
 import './App.css';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      currentDatabase: [],
+      activeTab: '',
       snips: [],
       modalOpen: false,
+      snipCategories: ["Misc", "Homepage", "Product Page", "Category Page", "Thumbnail", "B@SE Quirks"],
       masonryOptions: 
-      {columnWidth: 3}
+      {columnWidth: 3},
     }
 
     this._toggleModal = this._toggleModal.bind(this);
+    this._filterCategory = this._filterCategory.bind(this);
+    this._resetState = this._resetState.bind(this);
   }
 
   componentDidMount() {
@@ -39,8 +45,23 @@ class App extends Component {
       this.setState({
         snips: newState
       });
+      this.setState({
+        currentDatabase: newState
+      });
     });
   }
+
+  _resetState(){
+    this.setState({
+      snips: this.state.currentDatabase
+    });
+  }
+
+  _toggleModal(event){
+    document.body.style.overflow = "auto";
+    this.setState({ 
+        modalOpen: !this.state.modalOpen });
+}
 
   searchSnips(query) {
 
@@ -75,9 +96,41 @@ class App extends Component {
     } else {
       this.setState({snips: newState});
     }
-  } 
+  }
+
   
 
+  _filterCategory(category, tab){
+
+      // if(this.props.activeTab == this.props.children) {
+        //     console.log("It matches")
+        //     this.setState({ active: true });
+        // } else {
+        //     console.log("It DOES NOT match")
+        //     this.setState({ active: false });
+        // }
+
+    this.setState(
+      {activeTab: category.category}
+    ); 
+    console.log(tab);
+    this.setState({
+      snips: this.state.currentDatabase
+    });
+    let filterBy = (category.category);
+    let filterResults = [];
+    this.state.currentDatabase.map((snip) => {
+      if(snip.category == filterBy) {
+        filterResults.push(snip);
+      }
+    })
+    this.setState(
+      {snips: filterResults}
+    ); 
+
+   
+  }
+  
 
   render() {
 
@@ -100,17 +153,14 @@ class App extends Component {
       <nav className="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
         <ul className="nav nav-pills flex-column">
           <li className="nav-item">
-            <a className="nav-link active" href="#">Home <span className="sr-only">(current)</span></a>
+            <a className="nav-link active" href="#" onClick={()=> this._resetState()}>All Snips <span className="sr-only">(current)</span></a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Category 1</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Category 2</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Category 3</a>
-          </li>
+            {this.state.snipCategories.map((category) => {
+            return (
+            <Category filterCategory={() => this._filterCategory({category}, this.state.activeTab)} activeTab={this.state.activeTab} category={category.category}>
+              {category}
+            </Category>
+            )})}
         </ul>
       </nav>
 
@@ -122,7 +172,7 @@ class App extends Component {
       
        <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
         
-        <CreateSnippet snippetName='' snippetBody='' images='' category='' _toggleModal={this._toggleModal.bind(this)}/>
+        <CreateSnippet snippetName='' snippetBody='' images='' category='' snipCategories={this.state.snipCategories} _toggleModal={this._toggleModal.bind(this)}/>
 
         </Modal>
          
@@ -137,9 +187,9 @@ class App extends Component {
         >
             {this.state.snips.map((snip) => {
            return (
-            // <span key={snip.id}>
+            
             <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} images={snip.images} category={snip.category} _toggleModal={this._toggleModal.bind(this)} />
-            // </span>
+            
 
           )})}
 
@@ -155,14 +205,10 @@ class App extends Component {
     );
   }
 
-  _toggleModal(event){
-    document.body.style.overflow = "auto";
-    this.setState({ 
-        modalOpen: !this.state.modalOpen });
+
+
+  
 }
 
-
-
-}
 
 export default App;

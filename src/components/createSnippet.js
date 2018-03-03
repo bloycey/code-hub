@@ -154,12 +154,10 @@ class CreateSnippet extends React.Component {
               <div id="upload-percentage" class="text-center"></div>
               
               <select name="Select a Snippet Category" id="snippetCategory" value={this.state.snippetCategory} onChange={this.setCategory}>
-              <option value="Misc">Misc</option>
-              <option value="Homepage" >Homepage</option>
-              <option value="Product Page">Product Page</option>
-              <option value="Category Page">Category Page</option>
-              <option value="Thumbnail">Thumbnail</option>
-              <option value="B@SE Quirks">B@SE Quirks</option>
+              {this.props.snipCategories.map((category) => {
+            return (
+              <option>{category}</option>
+            )})}
               </select>
               <hr/>
               <div className="preview-panel">
