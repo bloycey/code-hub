@@ -14,6 +14,14 @@ class App extends Component {
     this.state = {
       currentDatabase: [],
       activeTab: '',
+      tabStates: {
+          Misc: false,
+          Homepage: false,
+          ProductPage: false,
+          CategoryPage: false,
+          Thumbnail: false,
+          BaseQuirks: false
+      },
       snips: [],
       modalOpen: false,
       snipCategories: ["Misc", "Homepage", "Product Page", "Category Page", "Thumbnail", "B@SE Quirks"],
@@ -24,9 +32,12 @@ class App extends Component {
     this._toggleModal = this._toggleModal.bind(this);
     this._filterCategory = this._filterCategory.bind(this);
     this._resetState = this._resetState.bind(this);
+    this._setActiveTab = this._setActiveTab.bind(this);
   }
 
   componentDidMount() {
+
+    
 
     const itemsRef = firebase.database().ref('snippets');
     itemsRef.on('value', (snapshot) => {
@@ -49,9 +60,11 @@ class App extends Component {
         currentDatabase: newState
       });
     });
+    this.refs.focusInputFieldDefault.focus()
   }
 
   _resetState(){
+    this.refs.focusInputFieldDefault.focus()
     this.setState({
       snips: this.state.currentDatabase
     });
@@ -98,22 +111,18 @@ class App extends Component {
     }
   }
 
-  
+  _setActiveTab(tab){
+    this.setState(
+      {activeTab: tab}
+    )
+  }
 
   _filterCategory(category, tab){
 
-      // if(this.props.activeTab == this.props.children) {
-        //     console.log("It matches")
-        //     this.setState({ active: true });
-        // } else {
-        //     console.log("It DOES NOT match")
-        //     this.setState({ active: false });
-        // }
+    // this.setState(
+    //   {activeTab: category.category}
+    // );
 
-    this.setState(
-      {activeTab: category.category}
-    ); 
-    console.log(tab);
     this.setState({
       snips: this.state.currentDatabase
     });
@@ -134,6 +143,8 @@ class App extends Component {
 
   render() {
 
+   
+
     return (
       <div id="app-wrapper">
       
@@ -152,15 +163,18 @@ class App extends Component {
     <div className="row">
       <nav className="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
         <ul className="nav nav-pills flex-column">
-          <li className="nav-item">
-            <a className="nav-link active" href="#" onClick={()=> this._resetState()}>All Snips <span className="sr-only">(current)</span></a>
-          </li>
+        <form action="">
+            <div className="category-list" tabindex="0" ref='focusInputFieldDefault' >
+            <label><input type="radio"  name="category" onClick={()=> this._resetState()}/>All Snips</label>
+            </div>
+            
             {this.state.snipCategories.map((category) => {
             return (
-            <Category filterCategory={() => this._filterCategory({category}, this.state.activeTab)} activeTab={this.state.activeTab} category={category.category}>
+            <Category filterCategory={() => this._filterCategory({category}, this.state.activeTab)} category={category.category}>
               {category}
             </Category>
             )})}
+            </form>
         </ul>
       </nav>
 

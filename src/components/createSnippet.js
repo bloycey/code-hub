@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 import firebase from '../firebase.js';
 import Textarea from "react-textarea-autosize";
+import Category from './category';
 var ReactMarkdown = require('react-markdown');
 
 class CreateSnippet extends React.Component {
@@ -11,7 +12,7 @@ class CreateSnippet extends React.Component {
             snippetName: this.props.snippetName,
             snippetBody: this.props.snippetBody,
             snippetImages: [],
-            snippetCategory: this.props.snippetCategory,
+            snippetCategory: this.props.category,
             textAreaStyles: {
               height: '50px'
             },
@@ -154,10 +155,12 @@ class CreateSnippet extends React.Component {
               <div id="upload-percentage" class="text-center"></div>
               
               <select name="Select a Snippet Category" id="snippetCategory" value={this.state.snippetCategory} onChange={this.setCategory}>
-              {this.props.snipCategories.map((category) => {
-            return (
-              <option>{category}</option>
-            )})}
+              <option value="Misc">Misc</option>
+              <option value="Homepage" >Homepage</option>
+              <option value="Product Page">Product Page</option>
+              <option value="Category Page">Category Page</option>
+              <option value="Thumbnail">Thumbnail</option>
+              <option value="B@SE Quirks">B@SE Quirks</option>
               </select>
               <hr/>
               <div className="preview-panel">
