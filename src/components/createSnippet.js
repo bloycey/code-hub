@@ -77,7 +77,9 @@ class CreateSnippet extends React.Component {
         let downloadURL = uploadTask.snapshot.downloadURL; 
         this.setState({ snippetImages: [...this.state.snippetImages, filename] })
        
-        prompt("Copy to clipboard and paste where you'd like the image to appear!", "![](" + downloadURL + ")");
+        this.setState({
+          snippetBody: this.state.snippetBody + "![](" + downloadURL + ")"
+        })
   
 }.bind(this));
 
