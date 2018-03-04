@@ -164,7 +164,7 @@ class App extends Component {
       <nav className="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
         <ul className="nav nav-pills flex-column">
         <form action="">
-            <div className="category-list" tabindex="0" ref='focusInputFieldDefault' >
+            <div className="category-list" tabIndex="0" ref='focusInputFieldDefault' >
             <label><input type="radio"  name="category" onClick={()=> this._resetState()}/>All Snips</label>
             </div>
             
@@ -202,7 +202,7 @@ class App extends Component {
             {this.state.snips.map((snip) => {
            return (
             
-            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} images={snip.images} category={snip.category} _toggleModal={this._toggleModal.bind(this)} />
+            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} images={snip.images} category={snip.category} snipCategories={this.state.snipCategories} _toggleModal={this._toggleModal.bind(this)} />
             
 
           )})}

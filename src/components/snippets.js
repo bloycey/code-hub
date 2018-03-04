@@ -58,7 +58,7 @@ class Snippet extends React.Component {
 
                   <Modal status={this.state.editModalOpen} _toggleModal={this._editToggleModal}>
         
-                    <CreateSnippet snippetName={this.props.title} snippetBody={this.props.body}  snippetCategory={this.props.category} removeItem={this.removeItem} _images={this.props.images} _toggleModal={this._editToggleModal} _removeId={this.props.id} setCategory={this.props.setCategory} />
+                    <CreateSnippet snippetName={this.props.title} snippetBody={this.props.body}  snippetCategory={this.props.category} removeItem={this.removeItem} _images={this.props.images} _toggleModal={this._editToggleModal} _removeId={this.props.id} setCategory={this.props.setCategory} snipCategories={this.props.snipCategories} />
 
                 </Modal>
 

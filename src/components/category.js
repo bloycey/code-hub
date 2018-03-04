@@ -18,7 +18,7 @@ class Category extends React.Component {
     render() {
 
         return (
-            <div className="category-list" ref='focusInputField' onClick={this.handleClick.bind(this)} tabindex="0">
+            <div className="category-list" ref='focusInputField' onClick={this.handleClick.bind(this)} tabIndex="0">
             <label><input type="radio"  name="category" defaultValue="checked"  />{this.props.children}</label>
             </div>
         )

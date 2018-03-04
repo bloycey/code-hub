@@ -12,6 +12,7 @@ class CreateSnippet extends React.Component {
             snippetName: this.props.snippetName,
             snippetBody: this.props.snippetBody,
             snippetImages: [],
+            snippetCategories: this.props.snipCategories,
             snippetCategory: this.props.category,
             textAreaStyles: {
               height: '50px'
@@ -91,6 +92,7 @@ class CreateSnippet extends React.Component {
       }
 
       setCategory(event) {
+        console.log(this.state.snippetCategories);
         this.setState({ snippetCategory: event.target.value });
     }
 
@@ -152,21 +154,20 @@ class CreateSnippet extends React.Component {
               
               <input type="file" id="file" className="upload-group" onChange={this.handleUpload}/>
               <div id="upload-progress"><div id="upload-indicator"></div></div>
-              <div id="upload-percentage" class="text-center"></div>
+              <div id="upload-percentage" className="text-center"></div>
               
               <select name="Select a Snippet Category" id="snippetCategory" value={this.state.snippetCategory} onChange={this.setCategory}>
-              <option value="Misc">Misc</option>
-              <option value="Homepage" >Homepage</option>
-              <option value="Product Page">Product Page</option>
-              <option value="Category Page">Category Page</option>
-              <option value="Thumbnail">Thumbnail</option>
-              <option value="B@SE Quirks">B@SE Quirks</option>
+              
+              {this.state.snippetCategories.map((category) => {
+            return (
+            <option value={category}>{category}</option>              
+            )})} 
               </select>
               <hr/>
               <div className="preview-panel">
               <ReactMarkdown source={this.state.snippetBody}  options={{escapeHtml: false, softBreak: "br"}} softBreak="br"/>
               </div>
-              <button type="Submit" class="submit-btn" onClick={this.handleSubmit}>{snippetBtn}</button>
+              <button type="Submit" className="submit-btn" onClick={this.handleSubmit}>{snippetBtn}</button>
             </form>
         </section>
          )
