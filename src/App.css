@@ -279,7 +279,7 @@ a.nav-link {
   margin-bottom: 0;
 }
 
-.category-list:focus {
+.category-list:focus, .category-list:hover {
   background-color: #073e52;
   color: white;
   outline: none;
