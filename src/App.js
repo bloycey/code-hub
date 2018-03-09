@@ -12,6 +12,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      loggedIn: false,
+      loginModal: false,
       currentDatabase: [],
       activeTab: '',
       tabStates: {
@@ -38,7 +40,7 @@ class App extends Component {
 
   componentDidMount() {
 
-    
+    this.refs.focusInputFieldDefault.focus();
 
     const itemsRef = firebase.database().ref('snippets');
     itemsRef.on('value', (snapshot) => {
@@ -61,7 +63,6 @@ class App extends Component {
         currentDatabase: newState
       });
     });
-    this.refs.focusInputFieldDefault.focus()
   }
 
   _resetState(){
@@ -72,10 +73,11 @@ class App extends Component {
   }
 
   _toggleModal(event){
-    document.body.style.overflow = "auto";
-    this.setState({ 
-        modalOpen: !this.state.modalOpen });
+      document.body.style.overflow = "auto";
+      this.setState({ 
+          modalOpen: !this.state.modalOpen });
 }
+
 
   searchSnips(query) {
 
@@ -147,7 +149,7 @@ class App extends Component {
 
     provider.addScope('https://www.googleapis.com/auth/userinfo.email');
 
-    firebase.auth().signInWithPopup(provider).then(function(result) {
+    firebase.auth().signInWithPopup(provider).then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       var token = result.credential.accessToken;
       // The signed-in user info.
@@ -155,6 +157,8 @@ class App extends Component {
       console.log(user.displayName);
       console.log(user.email);
       console.log(user.photoURL);
+      this.setState({ loggedIn: true
+      });
       // ...
     }).catch(function(error) {
       // Handle Errors here.
@@ -172,7 +176,10 @@ class App extends Component {
 
   render() {
 
-   
+   let button = null;
+   if(this.state.loggedIn == true) {
+     button = <button className="openModalBtn" onClick={this._toggleSignInModal}>+</button>;
+   }
 
     return (
       <div id="app-wrapper">
@@ -213,8 +220,7 @@ class App extends Component {
       <main role="main" className="col-sm-9 ml-sm-auto col-md-10 pt-3">
         <h1>Dashboard</h1>
       
-        <button className="openModalBtn" onClick={this._toggleModal}>+</button>
-
+        {button}
       
        <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
         
@@ -234,7 +240,7 @@ class App extends Component {
             {this.state.snips.map((snip) => {
            return (
             
-            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} images={snip.images} category={snip.category} snipCategories={this.state.snipCategories} _toggleModal={this._toggleModal.bind(this)} />
+            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} images={snip.images} category={snip.category} snipCategories={this.state.snipCategories} _toggleModal={this._toggleModal.bind(this)} _loggedIn={this.state.loggedIn} />
             
 
           )})}
