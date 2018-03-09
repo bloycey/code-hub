@@ -11,7 +11,7 @@ class Snippet extends React.Component {
     constructor() {
         super();
         this.state = {
-            editModalOpen: false,
+            editModalOpen: false
         }
     
         this._editToggleModal = this._editToggleModal.bind(this);
@@ -38,11 +38,20 @@ class Snippet extends React.Component {
         this.editToggleModal;
     }
 
+    _editToggleModal(event){
+        // event.preventDefault();
+        this.setState({ 
+            editModalOpen: !this.state.editModalOpen });
+
+    }
+
   
 
     render() { 
 
-        
+        if(this.props._loggedIn == false) {
+            return null;
+        } else
         return ( 
         
             <li className='display-snippet'>
@@ -68,15 +77,9 @@ class Snippet extends React.Component {
 
 
          )
+        }
+        
     }
 
-    _editToggleModal(event){
-        // event.preventDefault();
-        this.setState({ 
-            editModalOpen: !this.state.editModalOpen });
-
-    }
-
-}
  
 export default Snippet;
