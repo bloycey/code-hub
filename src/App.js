@@ -13,7 +13,6 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
-      loginModal: false,
       currentDatabase: [],
       activeTab: '',
       tabStates: {
@@ -25,6 +24,8 @@ class App extends Component {
           BaseQuirks: false
       },
       snips: [],
+      currentPage: 1,
+      snipsPerPage: 3,
       modalOpen: false,
       snipCategories: ["Misc", "Homepage", "Product Page", "Category Page", "Thumbnail", "B@SE Quirks"],
       masonryOptions: 
@@ -36,6 +37,7 @@ class App extends Component {
     this._resetState = this._resetState.bind(this);
     this._setActiveTab = this._setActiveTab.bind(this);
     this.signInClick = this.signInClick.bind(this);
+    this.paginationHandleClick = this.paginationHandleClick.bind(this);
   }
 
   componentDidMount() {
@@ -178,7 +180,11 @@ if(this.state.loggedIn == false) {
 }
 }
 
-    
+paginationHandleClick(event) {
+  this.setState({
+    currentPage: Number(event.target.id)
+  });
+} 
 
   
 
@@ -190,6 +196,33 @@ if(this.state.loggedIn == false) {
       addSnipButton = <button className="openModalBtn" onClick={this._toggleModal}>+</button>;
       loginOut = "Log Out"
     }
+
+    const snips = this.state.snips;
+    const currentPage = this.state.currentPage;
+    const snipsPerPage = this.state.snipsPerPage;
+
+    const indexOfLastSnip = currentPage * snipsPerPage;
+    const indexOfFirstSnip = indexOfLastSnip - snipsPerPage;
+    const currentSnips = snips.slice(indexOfFirstSnip, indexOfLastSnip);
+
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(snips.length / snipsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          key={number}
+          id={number}
+          onClick={this.paginationHandleClick}
+        >
+          {number}
+        </li>
+      );
+    
+  });
 
     return (
       <div id="app-wrapper">
@@ -245,15 +278,19 @@ if(this.state.loggedIn == false) {
             disableImagesLoaded={false} // default false
             updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
         >
-            {this.state.snips.map((snip) => {
+            {currentSnips.map((snip, index) => {
            return (
             
-            <Snippet id={snip.id} key={snip.id} title={snip.title} body={snip.body} images={snip.images} category={snip.category} snipCategories={this.state.snipCategories} _toggleModal={this._toggleModal.bind(this)} _loggedIn={this.state.loggedIn} />
+            <Snippet id={snip.id} key={index} title={snip.title} body={snip.body} images={snip.images} category={snip.category} snipCategories={this.state.snipCategories} _toggleModal={this._toggleModal.bind(this)} _loggedIn={this.state.loggedIn} />
             
 
           )})}
 
            </Masonry>
+
+          <ul id="page-numbers">
+            {renderPageNumbers}
+          </ul>
           
            </div>
         
