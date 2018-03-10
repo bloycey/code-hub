@@ -285,3 +285,28 @@ a.nav-link {
   color: white;
   outline: none;
 }
+pre {
+    background-color: #f8f9fa;
+    padding: 5px;
+    border-radius: .25rem;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.pagination li {
+  padding: 5px 10px;
+  border: 1px solid #dadada;
+  margin: 2px;
+}
+
+.pagination li:hover {
+  cursor: pointer;
+}
+
+.active {
+  background-color: #008768;
+  border-color: #008768;
+  color: #ffffff;
+}

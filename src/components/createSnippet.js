@@ -168,7 +168,7 @@ class CreateSnippet extends React.Component {
               </select>
               <hr/>
               <div className="preview-panel">
-              <Markdown source={this.state.snippetBody}  escapeHtml={true} allowedTypes={code}/>
+              <Markdown source={this.state.snippetBody}  escapeHtml={true}/>
               </div>
               <button type="Submit" className="submit-btn" onClick={this.handleSubmit}>{snippetBtn}</button>
             </form>

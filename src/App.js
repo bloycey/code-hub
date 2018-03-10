@@ -200,7 +200,6 @@ paginationHandleClick(event) {
     const snips = this.state.snips;
     const currentPage = this.state.currentPage;
     const snipsPerPage = this.state.snipsPerPage;
-
     const indexOfLastSnip = currentPage * snipsPerPage;
     const indexOfFirstSnip = indexOfLastSnip - snipsPerPage;
     const currentSnips = snips.slice(indexOfFirstSnip, indexOfLastSnip);
@@ -212,14 +211,15 @@ paginationHandleClick(event) {
     }
 
     const renderPageNumbers = pageNumbers.map(number => {
-      return (
+      return (   
         <li
           key={number}
           id={number}
           onClick={this.paginationHandleClick}
+          class={number == currentPage ? "active" : "inactive"}
         >
           {number}
-        </li>
+        </li>  
       );
     
   });
@@ -288,7 +288,7 @@ paginationHandleClick(event) {
 
            </Masonry>
 
-          <ul id="page-numbers">
+          <ul id="page-numbers" class="pagination">
             {renderPageNumbers}
           </ul>
           
