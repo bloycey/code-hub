@@ -3,7 +3,8 @@ import '../App.css';
 import firebase from '../firebase.js';
 import Textarea from "react-textarea-autosize";
 import Category from './category';
-var ReactMarkdown = require('react-markdown');
+import Markdown from 'react-markdown';
+
 
 class CreateSnippet extends React.Component {
     constructor(props) {
@@ -167,7 +168,7 @@ class CreateSnippet extends React.Component {
               </select>
               <hr/>
               <div className="preview-panel">
-              <ReactMarkdown source={this.state.snippetBody}  options={{escapeHtml: false, softBreak: "br"}} softBreak="br"/>
+              <Markdown source={this.state.snippetBody}  escapeHtml={true} allowedTypes={code}/>
               </div>
               <button type="Submit" className="submit-btn" onClick={this.handleSubmit}>{snippetBtn}</button>
             </form>

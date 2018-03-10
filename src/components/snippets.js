@@ -3,8 +3,7 @@ import '../App.css';
 import firebase from '../firebase.js';
 import Modal from './modal';
 import CreateSnippet from './createSnippet';
-
-var ReactMarkdown = require('react-markdown');
+import Markdown from 'react-markdown';
 
 class Snippet extends React.Component {
 
@@ -59,7 +58,7 @@ class Snippet extends React.Component {
             
                   <h3>{this.props.title}</h3>
                   <div className="category-container">{this.props.category}</div>
-                  <div><ReactMarkdown source={this.props.body}  options={{escapeHtml: false}}  softBreak="br"/></div>
+                  <div><Markdown source={this.props.body}  escapeHtml={true}  softBreak="br"/></div>
                   <hr/>
                   <button className="primary-btn" onClick={() => this.removeItem(this.props.id, this.props.images)}>Remove Code Snippet</button>
                   <button className="edit-btn" onClick={this._editToggleModal}>Edit Code Snippet</button>
