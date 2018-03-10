@@ -216,7 +216,7 @@ paginationHandleClick(event) {
           key={number}
           id={number}
           onClick={this.paginationHandleClick}
-          class={number == currentPage ? "active" : "inactive"}
+          className={number == currentPage ? "active" : "inactive"}
         >
           {number}
         </li>  
@@ -288,7 +288,7 @@ paginationHandleClick(event) {
 
            </Masonry>
 
-          <ul id="page-numbers" class="pagination">
+          <ul id="page-numbers" className="pagination">
             {renderPageNumbers}
           </ul>
           
