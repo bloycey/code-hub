@@ -61,7 +61,7 @@ class Snippet extends React.Component {
                   <div className="category-container">{this.props.category}</div>
                   <div><ReactMarkdown source={this.props.body}  options={{escapeHtml: false}}  softBreak="br"/></div>
                   <hr/>
-                  <button className="remove-btn" onClick={() => this.removeItem(this.props.id, this.props.images)}>Remove Code Snippet</button>
+                  <button className="primary-btn" onClick={() => this.removeItem(this.props.id, this.props.images)}>Remove Code Snippet</button>
                   <button className="edit-btn" onClick={this._editToggleModal}>Edit Code Snippet</button>
 
 

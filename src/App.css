@@ -54,7 +54,7 @@ ul ul, ol ul {
   list-style-type: disc;
 }
 
-.remove-btn {
+.primary-btn {
   margin-right: 5px;
 }
 
@@ -158,15 +158,16 @@ button {
   color: #ffffff;
 }
 
-.remove-btn {
+.primary-btn {
   color: #ffffff;
   background-color: #fb1659;
 }
 
-.remove-btn:hover {
+.primary-btn:hover {
   color: #fff;
-    background-color: #97103b;
-    border-color: #720c2d;
+    background-color: #dd114e;
+    border-color: #dd114e;
+    cursor: pointer;
 }
 
 .edit-btn, .submit-btn {

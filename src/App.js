@@ -122,10 +122,6 @@ class App extends Component {
 
   _filterCategory(category, tab){
 
-    // this.setState(
-    //   {activeTab: category.category}
-    // );
-
     this.setState({
       snips: this.state.currentDatabase
     });
@@ -149,37 +145,51 @@ class App extends Component {
 
     provider.addScope('https://www.googleapis.com/auth/userinfo.email');
 
-    firebase.auth().signInWithPopup(provider).then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = result.credential.accessToken;
-      // The signed-in user info.
-      var user = result.user;
-      console.log(user.displayName);
-      console.log(user.email);
-      console.log(user.photoURL);
-      this.setState({ loggedIn: true
-      });
-      // ...
-    }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
+if(this.state.loggedIn == false) {
+  firebase.auth().signInWithPopup(provider).then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log(user.displayName);
+    console.log(user.email);
+    console.log(user.photoURL);
+    this.setState({ loggedIn: true
     });
-  }
+    // ...
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    console.log("Sign In Error " + error)
+  });
+} else {
+  firebase.auth().signOut().then(() => {
+    console.log("Signed Out")
+    this.setState({ loggedIn: false
+    });
+  }).catch(function(error) {
+    console.log("Not signed out: " + error)
+  });
+}
+}
+
+    
 
   
 
   render() {
 
-   let button = null;
-   if(this.state.loggedIn == true) {
-     button = <button className="openModalBtn" onClick={this._toggleSignInModal}>+</button>;
-   }
+    let addSnipButton = null;
+    let loginOut = "Login";
+    if(this.state.loggedIn == true) {
+      addSnipButton = <button className="openModalBtn" onClick={this._toggleModal}>+</button>;
+      loginOut = "Log Out"
+    }
 
     return (
       <div id="app-wrapper">
@@ -192,9 +202,7 @@ class App extends Component {
       </button>
       <div className="collapse navbar-collapse" id="navbarsExampleDefault">
       <Search searchSnips={this.searchSnips.bind(this)}/>
-      <div className="btn remove-btn login-btn" onClick={this.signInClick}>
-        Login
-      </div>
+      <div className="btn primary-btn login-btn" onClick={this.signInClick}>{loginOut}</div>
       </div>
     </nav>
 
@@ -220,7 +228,7 @@ class App extends Component {
       <main role="main" className="col-sm-9 ml-sm-auto col-md-10 pt-3">
         <h1>Dashboard</h1>
       
-        {button}
+        {addSnipButton}
       
        <Modal status={this.state.modalOpen} _toggleModal={this._toggleModal.bind(this)}>
         
