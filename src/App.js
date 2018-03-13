@@ -156,8 +156,16 @@ if(this.state.loggedIn == false) {
     console.log(user.displayName);
     console.log(user.email);
     console.log(user.photoURL);
-    this.setState({ loggedIn: true
-    });
+
+    var userEmail = user.email; 
+    var emailRegex = new RegExp(/\@neto\.com\.au/); 
+ 
+    if(emailRegex.test(userEmail)){ 
+      this.setState({ loggedIn: true 
+      }); 
+    } else { 
+      alert("Only @neto.com.au email addresses are allowed"); 
+    }
     // ...
   }).catch(function(error) {
     // Handle Errors here.
@@ -281,7 +289,7 @@ paginationHandleClick(event) {
             {currentSnips.map((snip, index) => {
            return (
             
-            <Snippet id={snip.id} key={index} title={snip.title} body={snip.body} images={snip.images} category={snip.category} snipCategories={this.state.snipCategories} _toggleModal={this._toggleModal.bind(this)} _loggedIn={this.state.loggedIn} />
+            <Snippet id={snip.id} key={index} title={snip.title} body={snip.body} images={snip.images} category={snip.category ? snip.category : "Misc"} snipCategories={this.state.snipCategories} _toggleModal={this._toggleModal.bind(this)} _loggedIn={this.state.loggedIn} />
             
 
           )})}
