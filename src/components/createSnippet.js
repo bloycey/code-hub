@@ -14,7 +14,7 @@ class CreateSnippet extends React.Component {
             snippetBody: this.props.snippetBody,
             snippetImages: [],
             snippetCategories: this.props.snipCategories,
-            snippetCategory: this.props.category,
+            snippetCategory: this.props.snippetCategory,
             textAreaStyles: {
               height: '50px'
             },
@@ -27,9 +27,11 @@ class CreateSnippet extends React.Component {
     }
 
     componentDidMount() {
-      if(this.state.snippetCategory == undefined) {
-      this.setState({ snippetCategory: "Misc" });
-      }
+      // if(this.state.snippetCategory == undefined) {
+      // this.setState({ snippetCategory: "Misc" });
+      // } else {
+      //   this.setState({ snippetCategory: this.props.category });
+      // }
    }
 
 
@@ -95,7 +97,6 @@ class CreateSnippet extends React.Component {
       }
 
       setCategory(event) {
-        console.log(this.state.snippetCategories);
         this.setState({ snippetCategory: event.target.value });
     }
 
