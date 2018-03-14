@@ -25,7 +25,7 @@ class App extends Component {
       },
       snips: [],
       currentPage: 1,
-      snipsPerPage: 3,
+      snipsPerPage: 50,
       modalOpen: false,
       snipCategories: ["Misc", "Homepage", "Product Page", "Category Page", "Thumbnail", "B@SE Quirks"],
       masonryOptions: 
@@ -237,6 +237,13 @@ paginationHandleClick(event) {
     
   });
 
+  let pagination;
+      if(snips.length > snipsPerPage) {
+        pagination = renderPageNumbers;
+      } else {
+        pagination = null;
+      }
+
     return (
       <div id="app-wrapper">
       
@@ -300,9 +307,9 @@ paginationHandleClick(event) {
           )})}
 
            </Masonry>
-
+          
           <ul id="page-numbers" className="pagination">
-            {renderPageNumbers}
+            {pagination}
           </ul>
           
            </div>
