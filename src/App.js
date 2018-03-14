@@ -143,49 +143,54 @@ class App extends Component {
 
   signInClick(){
 
-    var provider = new firebase.auth.GoogleAuthProvider();
+    //Temporary short cut for development
+    this.setState({ loggedIn: true 
+    }); 
+    
 
-    provider.addScope('https://www.googleapis.com/auth/userinfo.email');
+//     var provider = new firebase.auth.GoogleAuthProvider();
 
-if(this.state.loggedIn == false) {
-  firebase.auth().signInWithPopup(provider).then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    console.log(user.displayName);
-    console.log(user.email);
-    console.log(user.photoURL);
+//     provider.addScope('https://www.googleapis.com/auth/userinfo.email');
 
-    var userEmail = user.email; 
-    var emailRegex = new RegExp(/\@neto\.com\.au/); 
+// if(this.state.loggedIn == false) {
+//   firebase.auth().signInWithPopup(provider).then((result) => {
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     var token = result.credential.accessToken;
+//     // The signed-in user info.
+//     var user = result.user;
+//     console.log(user.displayName);
+//     console.log(user.email);
+//     console.log(user.photoURL);
+
+//     var userEmail = user.email; 
+//     var emailRegex = new RegExp(/\@neto\.com\.au/); 
  
-    if(emailRegex.test(userEmail)){ 
-      this.setState({ loggedIn: true 
-      }); 
-    } else { 
-      alert("Only @neto.com.au email addresses are allowed"); 
-    }
-    // ...
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    console.log("Sign In Error " + error)
-  });
-} else {
-  firebase.auth().signOut().then(() => {
-    console.log("Signed Out")
-    this.setState({ loggedIn: false
-    });
-  }).catch(function(error) {
-    console.log("Not signed out: " + error)
-  });
-}
+//     if(emailRegex.test(userEmail)){ 
+//       this.setState({ loggedIn: true 
+//       }); 
+//     } else { 
+//       alert("Only @neto.com.au email addresses are allowed"); 
+//     }
+//     // ...
+//   }).catch(function(error) {
+//     // Handle Errors here.
+//     var errorCode = error.code;
+//     var errorMessage = error.message;
+//     // The email of the user's account used.
+//     var email = error.email;
+//     // The firebase.auth.AuthCredential type that was used.
+//     var credential = error.credential;
+//     console.log("Sign In Error " + error)
+//   });
+// } else {
+//   firebase.auth().signOut().then(() => {
+//     console.log("Signed Out")
+//     this.setState({ loggedIn: false
+//     });
+//   }).catch(function(error) {
+//     console.log("Not signed out: " + error)
+//   });
+// }
 }
 
 paginationHandleClick(event) {
