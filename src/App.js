@@ -321,7 +321,7 @@ paginationHandleClick(event) {
             disableImagesLoaded={false} // default false
             updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
         >
-            {filteredSnips.map((snip, index) => {
+            {currentSnips.map((snip, index) => {
 
               if(snipCounter >= snipsPerPage) {
                 return;
