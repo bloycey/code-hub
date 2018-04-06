@@ -27,11 +27,11 @@ class CreateSnippet extends React.Component {
     }
 
     componentDidMount() {
-      // if(this.state.snippetCategory == undefined) {
-      // this.setState({ snippetCategory: "Misc" });
-      // } else {
-      //   this.setState({ snippetCategory: this.props.category });
-      // }
+      if(this.state.snippetCategory == undefined) {
+      this.setState({ snippetCategory: "Misc" });
+      } else {
+        this.setState({ snippetCategory: this.props.category });
+      }
    }
 
 

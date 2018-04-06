@@ -90,6 +90,9 @@ class App extends Component {
   _resetState(){
     this.refs.focusInputFieldDefault.focus()
     this.setState({
+      currentPage: 1
+    });
+    this.setState({
       currentDatabase: this.state.initialDatabase
     });
   }
@@ -143,6 +146,9 @@ class App extends Component {
   }
 
   _filterCategory(category, tab){
+    this.setState({
+      currentPage: 1
+    });
 
     this.setState({
       currentDatabase: this.state.initialDatabase
@@ -259,11 +265,11 @@ paginationHandleClick(event) {
   });
 
   let pagination;
-      if(initialSnips.length > snipsPerPage) {
+      // if(filteredSnips.length > snipsPerPage) {
         pagination = renderPageNumbers;
-      } else {
-        pagination = null;
-      }
+      // } else {
+      //   pagination = null;
+      // }
 
     return (
       <div id="app-wrapper">
