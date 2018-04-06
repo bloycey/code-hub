@@ -25,7 +25,7 @@ class App extends Component {
       },
       snips: [],
       currentPage: 1,
-      snipsPerPage: 50,
+      snipsPerPage: 5,
       modalOpen: false,
       snipCategories: ["Misc", "Homepage", "Product Page", "Category Page", "Thumbnail", "B@SE Quirks"],
       masonryOptions: 
