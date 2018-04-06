@@ -265,8 +265,6 @@ paginationHandleClick(event) {
         pagination = null;
       }
 
-  let snipCounter = 0;
-
     return (
       <div id="app-wrapper">
       
@@ -322,12 +320,6 @@ paginationHandleClick(event) {
             updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
         >
             {currentSnips.map((snip, index) => {
-
-              if(snipCounter >= snipsPerPage) {
-                return;
-              }
-
-              snipCounter++;
 
            return (
             
