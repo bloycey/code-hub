@@ -23,9 +23,10 @@ class App extends Component {
           Thumbnail: false,
           BaseQuirks: false
       },
+      initialDatabase: [],
       snips: [],
       currentPage: 1,
-      snipsPerPage: 50,
+      snipsPerPage: 4,
       modalOpen: false,
       snipCategories: ["Misc", "Homepage", "Product Page", "Category Page", "Thumbnail", "B@SE Quirks"],
       masonryOptions: 
@@ -47,8 +48,30 @@ class App extends Component {
     const itemsRef = firebase.database().ref('snippets');
     itemsRef.on('value', (snapshot) => {
       let snips = snapshot.val();
+     
+      let initialState = [];
       let newState = [];
+      let iterator = 0;
       for (let snip in snips) {
+        initialState.unshift({
+          id: snip,
+          title: snips[snip].title,
+          body: snips[snip].body,
+          images: snips[snip].images,
+          category: snips[snip].category
+
+        });
+      }
+      this.setState({
+        initialDatabase: initialState,
+      });
+      for (let snip in snips) {
+        console.log(iterator);
+        iterator++;
+        if(iterator > this.state.snipsPerPage) {
+          iterator = 0;
+          break;
+        }
         newState.unshift({
           id: snip,
           title: snips[snip].title,
@@ -125,11 +148,11 @@ class App extends Component {
   _filterCategory(category, tab){
 
     this.setState({
-      snips: this.state.currentDatabase
+      snips: this.state.initialDatabase
     });
     let filterBy = (category.category);
     let filterResults = [];
-    this.state.currentDatabase.map((snip) => {
+    this.state.initialDatabase.map((snip) => {
       if(snip.category == filterBy) {
         filterResults.push(snip);
       }
@@ -210,16 +233,16 @@ paginationHandleClick(event) {
       loginOut = "Log Out"
     }
 
-    const snips = this.state.snips;
+    const initialSnips = this.state.initialDatabase;
     const currentPage = this.state.currentPage;
     const snipsPerPage = this.state.snipsPerPage;
     const indexOfLastSnip = currentPage * snipsPerPage;
     const indexOfFirstSnip = indexOfLastSnip - snipsPerPage;
-    const currentSnips = snips.slice(indexOfFirstSnip, indexOfLastSnip);
+    const currentSnips = initialSnips.slice(indexOfFirstSnip, indexOfLastSnip);
 
 
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(snips.length / snipsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(initialSnips.length / snipsPerPage); i++) {
       pageNumbers.push(i);
     }
 
@@ -238,7 +261,7 @@ paginationHandleClick(event) {
   });
 
   let pagination;
-      if(snips.length > snipsPerPage) {
+      if(initialSnips.length > snipsPerPage) {
         pagination = renderPageNumbers;
       } else {
         pagination = null;
