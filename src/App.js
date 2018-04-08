@@ -23,6 +23,7 @@ class App extends Component {
           Thumbnail: false,
           BaseQuirks: false
       },
+      initialDatabase: [],
       snips: [],
       currentPage: 1,
       snipsPerPage: 5,
@@ -46,21 +47,40 @@ class App extends Component {
 
     const itemsRef = firebase.database().ref('snippets');
     itemsRef.on('value', (snapshot) => {
-      let snips = snapshot.val();
+      let initialDatabase = snapshot.val();
+     
+      let initialState = [];
       let newState = [];
-      for (let snip in snips) {
-        newState.unshift({
+      let iterator = 0;
+      for (let snip in initialDatabase) {
+        initialState.unshift({
           id: snip,
-          title: snips[snip].title,
-          body: snips[snip].body,
-          images: snips[snip].images,
-          category: snips[snip].category
+          title: initialDatabase[snip].title,
+          body: initialDatabase[snip].body,
+          images: initialDatabase[snip].images,
+          category: initialDatabase[snip].category
 
         });
       }
       this.setState({
-        snips: newState
+        initialDatabase: initialState,
       });
+      for (let snip in initialDatabase) {
+        // console.log(iterator);
+        // iterator++;
+        // if(iterator > this.state.snipsPerPage) {
+        //   iterator = 0;
+        //   break;
+        // }
+        newState.unshift({
+          id: snip,
+          title: initialDatabase[snip].title,
+          body: initialDatabase[snip].body,
+          images: initialDatabase[snip].images,
+          category: initialDatabase[snip].category
+
+        });
+      }
       this.setState({
         currentDatabase: newState
       });
@@ -70,7 +90,10 @@ class App extends Component {
   _resetState(){
     this.refs.focusInputFieldDefault.focus()
     this.setState({
-      snips: this.state.currentDatabase
+      currentPage: 1
+    });
+    this.setState({
+      currentDatabase: this.state.initialDatabase
     });
   }
 
@@ -85,18 +108,18 @@ class App extends Component {
 
     const itemsRef = firebase.database().ref('snippets');
     let newState = [];
-    this.setState({snips: null});
+    this.setState({currentDatabase: null});
 
     itemsRef.once('value', (snapshot) => {
-      let snips = snapshot.val();
+      let searchDatabase = snapshot.val();
       
-      for (let snip in snips) {
+      for (let snip in searchDatabase) {
         newState.unshift({
           id: snip,
-          title: snips[snip].title,
-          body: snips[snip].body,
-          images: snips[snip].images,
-          category: snips[snip].category
+          title: searchDatabase[snip].title,
+          body: searchDatabase[snip].body,
+          images: searchDatabase[snip].images,
+          category: searchDatabase[snip].category
         });
       }
     });
@@ -110,9 +133,9 @@ class App extends Component {
           totalresults.push(newState[result]);
         }
       }
-      this.setState({snips: totalresults});
+      this.setState({currentDatabase: totalresults});
     } else {
-      this.setState({snips: newState});
+      this.setState({currentDatabase: newState});
     }
   }
 
@@ -123,19 +146,22 @@ class App extends Component {
   }
 
   _filterCategory(category, tab){
+    this.setState({
+      currentPage: 1
+    });
 
     this.setState({
-      snips: this.state.currentDatabase
+      currentDatabase: this.state.initialDatabase
     });
     let filterBy = (category.category);
     let filterResults = [];
-    this.state.currentDatabase.map((snip) => {
+    this.state.initialDatabase.map((snip) => {
       if(snip.category == filterBy) {
         filterResults.push(snip);
       }
     })
     this.setState(
-      {snips: filterResults}
+      {currentDatabase: filterResults}
     ); 
 
    
@@ -210,16 +236,17 @@ paginationHandleClick(event) {
       loginOut = "Log Out"
     }
 
-    const snips = this.state.snips;
+    let filteredSnips = this.state.currentDatabase;
+    const initialSnips = this.state.initialDatabase;
     const currentPage = this.state.currentPage;
     const snipsPerPage = this.state.snipsPerPage;
     const indexOfLastSnip = currentPage * snipsPerPage;
     const indexOfFirstSnip = indexOfLastSnip - snipsPerPage;
-    const currentSnips = snips.slice(indexOfFirstSnip, indexOfLastSnip);
+    const currentSnips = filteredSnips.slice(indexOfFirstSnip, indexOfLastSnip);
 
 
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(snips.length / snipsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(filteredSnips.length / snipsPerPage); i++) {
       pageNumbers.push(i);
     }
 
@@ -238,7 +265,7 @@ paginationHandleClick(event) {
   });
 
   let pagination;
-      if(snips.length > snipsPerPage) {
+      if(filteredSnips.length > snipsPerPage && this.state.loggedIn == true) {
         pagination = renderPageNumbers;
       } else {
         pagination = null;
@@ -299,6 +326,7 @@ paginationHandleClick(event) {
             updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
         >
             {currentSnips.map((snip, index) => {
+
            return (
             
             <Snippet id={snip.id} key={index} title={snip.title} body={snip.body} images={snip.images} category={snip.category ? snip.category : "Misc"} snipCategories={this.state.snipCategories} _toggleModal={this._toggleModal.bind(this)} _loggedIn={this.state.loggedIn} />
