@@ -128,8 +128,9 @@ class App extends Component {
     if(query !== '') {
       let totalresults = [];
       for (let result in newState) {
-        const title = newState[result].title;
-        if (title.indexOf(query) >= 0) {
+        const title = newState[result].title.toLowerCase();
+        let queryLower = query.toLowerCase();
+        if (title.indexOf(queryLower) >= 0) {
           totalresults.push(newState[result]);
         }
       }
