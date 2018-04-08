@@ -66,12 +66,12 @@ class App extends Component {
         initialDatabase: initialState,
       });
       for (let snip in initialDatabase) {
-        console.log(iterator);
-        iterator++;
-        if(iterator > this.state.snipsPerPage) {
-          iterator = 0;
-          break;
-        }
+        // console.log(iterator);
+        // iterator++;
+        // if(iterator > this.state.snipsPerPage) {
+        //   iterator = 0;
+        //   break;
+        // }
         newState.unshift({
           id: snip,
           title: initialDatabase[snip].title,
@@ -265,11 +265,11 @@ paginationHandleClick(event) {
   });
 
   let pagination;
-      // if(filteredSnips.length > snipsPerPage) {
+      if(filteredSnips.length > snipsPerPage && this.state.loggedIn == true) {
         pagination = renderPageNumbers;
-      // } else {
-      //   pagination = null;
-      // }
+      } else {
+        pagination = null;
+      }
 
     return (
       <div id="app-wrapper">
