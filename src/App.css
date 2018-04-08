@@ -315,3 +315,27 @@ pre code {
   font-family: monospace !important;
   font-size: 16px;
 }
+
+.modal-container {
+  position: relative;
+}
+
+.close-btn {
+position: absolute;
+top: -25px;
+right: 9%;
+color: #ffffff;
+background-color: #333333;
+height: 50px;
+padding: 6px;
+font-size: 20px;
+width: 50px;
+text-align: center;
+border-radius: 50%;
+border: 3px solid #ffffff;
+}
+
+.display-snippet:hover {
+  -webkit-box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 2px 15px rgba(0,0,0,0.30);
+  box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 2px 15px rgba(0,0,0,0.30);
+}

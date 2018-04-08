@@ -33,8 +33,9 @@ export class Modal extends React.Component {
 
         return (
         
-            <div className="backdrop" style={modalStyle} onClick={this.props._toggleModal}>
-                <div className="container modal-container" onClick={this._dontClose}>
+            <div className="backdrop" style={modalStyle} onClick={this._dontClose}>
+                <div className="container modal-container">
+                    <span class="close-btn" onClick={this.props._toggleModal}>X</span>
                 {this.props.children}
                 </div>
             </div>

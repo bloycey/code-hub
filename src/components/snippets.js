@@ -54,7 +54,7 @@ class Snippet extends React.Component {
         return ( 
         
             <li className='display-snippet'>
-            <div className='wrapper' key={this.props.id}>
+            <div className='wrapper' key={this.props.id} onClick={this._editToggleModal}>
             
                   <h3>{this.props.title}</h3>
                   <div className="category-container">{this.props.category}</div>
