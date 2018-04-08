@@ -26,7 +26,7 @@ class App extends Component {
       initialDatabase: [],
       snips: [],
       currentPage: 1,
-      snipsPerPage: 4,
+      snipsPerPage: 5,
       modalOpen: false,
       snipCategories: ["Misc", "Homepage", "Product Page", "Category Page", "Thumbnail", "B@SE Quirks"],
       masonryOptions: 
