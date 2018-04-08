@@ -73,6 +73,8 @@ ul ul, ol ul {
 .display-snippet {
   margin: 20px;
   display: inline-block;
+  max-height: 600px;
+  overflow: hidden;
 }
 
 .display-item{
