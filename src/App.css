@@ -75,6 +75,7 @@ ul ul, ol ul {
   display: inline-block;
   max-height: 600px;
   overflow: hidden;
+  border-bottom: 20px solid #ededed;
 }
 
 .display-item{
@@ -340,4 +341,8 @@ border: 3px solid #ffffff;
 .display-snippet:hover {
   -webkit-box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 2px 15px rgba(0,0,0,0.30);
   box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 2px 15px rgba(0,0,0,0.30);
+}
+
+.hidden {
+  display: none;
 }

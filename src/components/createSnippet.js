@@ -132,12 +132,8 @@ class CreateSnippet extends React.Component {
 
      
 
-      let snippetBtn;
-      if(this.props._removeId) {
-        snippetBtn = "Edit Snippet"
-      } else {
-        snippetBtn = "Add Snippet"
-      } 
+      const snippetBtn = this.props._removeId ? "Edit Snippet" : "Add Snippet";
+      const removeBtn = this.props._removeId ? 'primary-btn' : 'hidden';
       
     let snippetStyle = {
       width: '80%',
@@ -172,6 +168,8 @@ class CreateSnippet extends React.Component {
               <Markdown source={this.state.snippetBody}  escapeHtml={true}/>
               </div>
               <button type="Submit" className="submit-btn" onClick={this.handleSubmit}>{snippetBtn}</button>
+               <button className={removeBtn} onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.props.removeItem(this.props._removeId, this.props._images) } }>Remove Code Snippet</button>
+                  
             </form>
         </section>
          )

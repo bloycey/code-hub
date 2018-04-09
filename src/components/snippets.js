@@ -20,7 +20,6 @@ class Snippet extends React.Component {
 
 
     removeItem(snipId, images) {
-    
         if (images !== undefined && images !== '') {
             let allImages = images.toString().split(",");
             for (var i in allImages){
@@ -31,6 +30,8 @@ class Snippet extends React.Component {
 
         const itemRef = firebase.database().ref(`/snippets/${snipId}`);
         itemRef.remove();
+        this.setState({ 
+            editModalOpen: !this.state.editModalOpen });
       }
 
     editItem(snipId) {
